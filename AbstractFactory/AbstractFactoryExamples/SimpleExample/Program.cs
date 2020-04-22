@@ -10,7 +10,8 @@ namespace SimpleExample
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Abstract Factory Example");
+            Console.WriteLine("Abstract Factory");
+            Console.WriteLine("Home and Kitchen Example");
 
             var metalFactory = new MetalFactory();
             var woodFactory = new WoodFactory();
