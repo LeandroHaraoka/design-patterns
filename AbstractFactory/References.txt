@@ -1,2 +1,4 @@
 Fundamentals
 https://medium.com/@hitherejoe/design-patterns-abstract-factory-39a22985bdbf
+https://refactoring.guru/design-patterns/abstract-factory
+Pluralsight: Tactical Design Patterns in .NET: Creating Objects. By Zoran Horvat.
