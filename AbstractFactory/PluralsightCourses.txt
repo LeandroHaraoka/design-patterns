@@ -1,0 +1,2 @@
+Tactical Design Patterns in .NET: Creating Objects
+

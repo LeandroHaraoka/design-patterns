@@ -1,0 +1,2 @@
+Fundamentals
+https://medium.com/@hitherejoe/design-patterns-abstract-factory-39a22985bdbf
