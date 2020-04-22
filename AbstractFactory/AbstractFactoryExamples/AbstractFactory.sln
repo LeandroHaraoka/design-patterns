@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeAndKitchenExample", "SimpleExample\HomeAndKitchenExample.csproj", "{AF4B016B-BD03-42CB-A045-5337D3DA40A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeAndKitchenExample", "HomeAndKitchenExample\HomeAndKitchenExample.csproj", "{AF4B016B-BD03-42CB-A045-5337D3DA40A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialExample", "FinancialExample\FinancialExample.csproj", "{961992F0-5113-45C7-A417-00B69D38CF00}"
 EndProject
