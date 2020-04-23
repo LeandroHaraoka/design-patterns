@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace HomeAndKitchenExample.Products.Tables
 {
-    public class Table
+    public abstract class Table
     {
         public Color Color { get; set; }
         public ProductSize Size { get; set; }
