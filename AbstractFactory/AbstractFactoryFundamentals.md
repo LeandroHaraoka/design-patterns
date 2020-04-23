@@ -20,6 +20,7 @@ Products: Chairs & Tables
 | **Table** 	| WoodTable 	| MetalTable 	|
 
  - Make a diagram with abstract and concretes factories and products
+
 ![Home and Kitchen Example Diagram ](Images/HomeAndKitchenExample.jpg)
 
 
