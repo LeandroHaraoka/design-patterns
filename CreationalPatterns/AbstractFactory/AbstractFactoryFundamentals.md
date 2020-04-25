@@ -205,7 +205,7 @@ https://medium.com/@hitherejoe/design-patterns-abstract-factory-39a22985bdbf
 
 https://refactoring.guru/design-patterns/abstract-factory
 
-Pluralsight Course: *Tactical Design Patterns in .NET: Creating Objects*. By Zoran Horvat.
+Pluralsight Course: *Tactical Design Patterns in .NET: Creating Objects - Advancing from Constructor to Abstract Factory.*. By Zoran Horvat.
 
 ## TODOs
 

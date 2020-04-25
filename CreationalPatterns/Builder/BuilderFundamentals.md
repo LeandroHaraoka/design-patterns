@@ -1,6 +1,6 @@
 # Builder
 
-Builder is a design pattern that allows the creation of differents types and representations of an object reusing the same construction code. It makes easy to create objects that contain many and nested properties as it provides a step-by-step construction, a composition mechanism.
+Builder is a design pattern that allows the creation of differents types and representations of an object reusing the same construction code. It makes easy to create objects that contain many and nested properties as it provides a step-by-step construction, a composition mechanism. The final result of Builder pattern is a concrete product construction, not an abstract product.
 
 ## Problem
 
@@ -231,17 +231,131 @@ The client should be independent of the parts that make an object.
 ## Advantages
 
 Provides construction of differents object representations.
+
 Hides product construction details.
+
 The construction code of each object part is written once and is reused by different builders.
+
+Builder pattern can be used also to prevent a client to create an inconsistent object. Construction rules can be defined at the Builder methods.
 
 ## Tips
 
 No abstract class is necessary for products. As the representations differs from each other, there is no relevant gain in creating abstractions.
 
+The final result of Builder pattern is a concrete product, not an abstraction. Type safety is granted and avoids polymorphism troubles.
+
+
 The difference of Builder and Abstract Factory is that the first one focus in complex objects step-by-step construction while the second emphasize in constructing family related products (simple or complex).
+
+Sometimes Builder pattern is overkill for some classes construction. Consider using it for high complexity construction classes. If a class has a constructor with too many instructions, probably Builder pattern is a nice idea.
+
+## Adding Finite State Machine to Builder
+
+During an object construction process, builders eventually will throw exceptions when construction inconsistency occurs, that means imperative validations are occurring at Builder methods. To avoid this, a finite state machine can be added to control and validate the object construction.
+
+See a simple example of a Builder.
+
+```
+public class Person
+{
+    public string Name { get; set; }
+
+    public Person(string name)
+    {
+        if (string.IsNullOrEmpty(Name))
+            throw new ArgumentException();
+        Name = name;
+    }
+}
+
+public class PersonBuilder
+{
+    private string _name;
+
+    public PersonBuilder SetName(string name)
+    {
+        if (string.IsNullOrEmpty(name))
+            throw new ArgumentException();
+        _name = name;
+        return this;
+    }
+
+    public Person Build()
+    {
+        return new Person(_name);
+    }
+}
+```
+
+Note that, if the client calls Build() method without calling SetName(), Build() would find an ArgumentException, as new Person(string name) does not accept null nor empty values.
+
+To avoid throwing an axception from a Builder method, we can add a Finite State Machine (State Pattern) that will be responsible for throwing this exception.
+
+Here we added a NameState machine which first state is 'UnitializedName'.
+
+ ```
+public class PersonBuilder
+{
+    private INameState _nameState = new UnitializedNameState();
+
+    public PersonBuilder SetName(string name)
+    {
+        _nameState = _nameState.Set(name);
+        return this;
+    }
+
+    public Person Build()
+    {
+        return new Person(_nameState.Get());
+    }
+}
+```
+
+If we call Build method without calling SetName instructions, it will return an InvalidOperationException.
+
+```
+public interface INameState
+{
+    INameState Set(string name);
+    string Get();
+}
+```
+```
+public class UnitializedNameState : INameState
+{
+    public INameState Set(string name) => new InitializedNameState(name);
+    public string Get() => throw new InvalidOperationException();
+}
+```
+
+When we call SetName, 'Name' state changes from 'UnitializedNameState' to 'InitializedNameState' and, at this state, the name value is stored at the Infinite Machine State in a field called _name. Note that at this state change, a validation is performed to check value is not null nor empty.
+
+If we call SetName again, it will continue at InitializedNameState, but storing the new name value.
+
+```
+public class InitializedNameState : INameState
+{
+    private string _name;
+
+    public InitializedNameState(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException();
+        _name = name;
+    }
+
+    public INameState Set(string name) => new InitializedNameState(name);
+
+    public string Get() => _name;
+}
+```
+
+If the client tries to build a person with no name, the NameState machine will throw an InvalidOperationException. In other words, the Infite State Machine decided to throw this exception, not the Builder.
 
 ## References
 
 https://refactoring.guru/design-patterns/builder
 
 https://refactoring.guru/design-patterns/builder/csharp/example
+
+Pluralsight Course: *Tactical Design Patterns in .NET: Creating Objects - Returning to Concrete Classes with the Builder Pattern*. By Zoran Horvat.
