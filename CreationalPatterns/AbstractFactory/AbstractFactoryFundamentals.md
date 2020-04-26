@@ -92,38 +92,48 @@ public class MetalTable : Table
 - The **Abstract Factory** is an interface or abstract class that contains de methods signatures needed to create the products
 
 ```
-public interface IHomeAndKitchenFactory
+public abstract class HomeAndKitchenFactory
 {
-    Chair CreateChair(Color color, ProductSize size);
-    Table CreateTable(Color color, ProductSize size);
+    public static HomeAndKitchenFactory GetConcreteFactory(ProductMaterial material)
+    {
+        switch (material)
+        {
+            case ProductMaterial.Wood: return new WoodFactory();
+            case ProductMaterial.Metal: return new MetalFactory();
+            default: throw new ArgumentException("Please provide a valid product material.");
+        }
+    }
+
+    public abstract Chair CreateChair(Color color, ProductSize size);
+    public abstract Table CreateTable(Color color, ProductSize size);
 }
 ```
 
 - For each product family there is a **Concrete Factory** that implements or override the Abstract Factory methods with the products creation instructions.
 
 ```
-public class WoodFactory : IHomeAndKitchenFactory
+public class WoodFactory : HomeAndKitchenFactory
 {
-    public Chair CreateChair(Color color, ProductSize size)
+    public override Chair CreateChair(Color color, ProductSize size)
     {
         return new WoodChair(color, size);
     }
 
-    public Table CreateTable(Color color, ProductSize size)
+    public override Table CreateTable(Color color, ProductSize size)
     {
         return new WoodTable(color, size);
     }
 }
 ```
 ```
-public class MetalFactory : IHomeAndKitchenFactory
+public class MetalFactory : HomeAndKitchenFactory
 {
-    public Chair CreateChair(Color color, ProductSize size)
+    public override Chair CreateChair(Color color, ProductSize size)
     {
         return new MetalChair(color, size);
     }
 
-    public Table CreateTable(Color color, ProductSize size)
+    public override Table CreateTable(Color color, ProductSize size)
     {
         return new MetalTable(color, size);
     }
@@ -138,28 +148,27 @@ static void Main(string[] args)
     Console.WriteLine("Abstract Factory");
     Console.WriteLine("Home and Kitchen Example");
 
-    var metalFactory = new MetalFactory();
-    var woodFactory = new WoodFactory();
-
     Console.WriteLine("\nBlue, small and wood chair:");
-    CreateChair(woodFactory, Color.Blue, ProductSize.Small);
+    CreateChair(ProductMaterial.Wood, Color.Blue, ProductSize.Small);
     Console.WriteLine("\nBlack, medium and wood table:");
-    CreateTable(woodFactory, Color.Black, ProductSize.Medium);
+    CreateTable(ProductMaterial.Wood, Color.Black, ProductSize.Medium);
 
     Console.WriteLine("\nRed, small and metal chair:");
-    CreateChair(metalFactory, Color.Red, ProductSize.Small);
+    CreateChair(ProductMaterial.Metal, Color.Red, ProductSize.Small);
     Console.WriteLine("\nWhite, large and metal table:");
-    CreateTable(metalFactory, Color.White, ProductSize.Large);
+    CreateTable(ProductMaterial.Metal, Color.White, ProductSize.Large);
 }
 
-private static void CreateChair(IHomeAndKitchenFactory factory, Color color, ProductSize size)
+private static void CreateChair(ProductMaterial material, Color color, ProductSize size)
 {
+    var factory = HomeAndKitchenFactory.GetConcreteFactory(material);
     var chair = factory.CreateChair(color, size);
     PrintProductDetails(chair.Color, chair.Material, chair.Size);
 }
 
-private static void CreateTable(IHomeAndKitchenFactory factory, Color color, ProductSize size)
+private static void CreateTable(ProductMaterial material, Color color, ProductSize size)
 {
+    var factory = HomeAndKitchenFactory.GetConcreteFactory(material);
     var table = factory.CreateTable(color, size);
     PrintProductDetails(table.Color, table.Material, table.Size);
 }
