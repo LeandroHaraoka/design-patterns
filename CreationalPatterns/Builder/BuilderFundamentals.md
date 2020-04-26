@@ -238,6 +238,10 @@ The construction code of each object part is written once and is reused by diffe
 
 Builder pattern can be used also to prevent a client to create an inconsistent object. Construction rules can be defined at the Builder methods.
 
+## Disadvantages
+
+Sometimes Builder pattern is overkill for some classes construction. Consider using it for high complexity construction classes. If a class has a constructor with too many instructions, probably Builder pattern is a nice idea.
+
 ## Tips
 
 No abstract class is necessary for products. As the representations differs from each other, there is no relevant gain in creating abstractions.
@@ -246,8 +250,6 @@ The final result of Builder pattern is a concrete product, not an abstraction. T
 
 
 The difference of Builder and Abstract Factory is that the first one focus in complex objects step-by-step construction while the second emphasize in constructing family related products (simple or complex).
-
-Sometimes Builder pattern is overkill for some classes construction. Consider using it for high complexity construction classes. If a class has a constructor with too many instructions, probably Builder pattern is a nice idea.
 
 ## Adding Finite State Machine to Builder
 

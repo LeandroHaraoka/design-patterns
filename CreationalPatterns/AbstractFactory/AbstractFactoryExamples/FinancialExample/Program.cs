@@ -1,4 +1,5 @@
-﻿using FinancialExample.Factories;
+﻿using FinancialExample.Aggregates.ValueTypes;
+using FinancialExample.Factories;
 using System;
 
 namespace FinancialExample
@@ -10,28 +11,27 @@ namespace FinancialExample
             Console.WriteLine("Abstract Factory");
             Console.WriteLine("Financial Example");
 
-            var cashFactory = new CashFactory();
-            var bondFactory = new BondFactory();
-
             Console.WriteLine("\n[Cash Order]");
-            CreateOrder(cashFactory);
+            CreateOrder(AssetType.Cash);
             Console.WriteLine("\n[Cash Deal]");
-            CreateDeal(cashFactory);
+            CreateDeal(AssetType.Cash);
 
             Console.WriteLine("\n[Bond Order]");
-            CreateOrder(bondFactory);
+            CreateOrder(AssetType.Bond);
             Console.WriteLine("\n[Bond Deal]");
-            CreateDeal(bondFactory);
+            CreateDeal(AssetType.Bond);
         }
 
-        private static void CreateOrder(IFinancialFactory factory)
+        private static void CreateOrder(AssetType assetType)
         {
+            var factory = FinancialFactory.GetFactory(assetType);
             var order = factory.CreateOrder();
             PrintAggregateDetails(order);
         }
 
-        private static void CreateDeal(IFinancialFactory factory)
+        private static void CreateDeal(AssetType assetType)
         {
+            var factory = FinancialFactory.GetFactory(assetType);
             var deal = factory.CreateDeal();
             PrintAggregateDetails(deal);
         }

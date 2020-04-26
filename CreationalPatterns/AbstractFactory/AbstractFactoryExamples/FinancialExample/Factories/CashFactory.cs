@@ -6,17 +6,16 @@ using FinancialExample.Aggregates.Orders;
 
 namespace FinancialExample.Factories
 {
-    public class CashFactory : IFinancialFactory
+    public class CashFactory : FinancialFactory
     {
-        public Order CreateOrder()
+        public override Order CreateOrder()
         {
             return new CashOrder();
         }
 
-        public Deal CreateDeal()
+        public override Deal CreateDeal()
         {
             return new CashDeal();
         }
-
     }
 }

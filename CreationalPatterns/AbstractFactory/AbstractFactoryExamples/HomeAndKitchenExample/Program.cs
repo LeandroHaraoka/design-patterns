@@ -13,28 +13,27 @@ namespace SimpleExample
             Console.WriteLine("Abstract Factory");
             Console.WriteLine("Home and Kitchen Example");
 
-            var metalFactory = new MetalFactory();
-            var woodFactory = new WoodFactory();
-
             Console.WriteLine("\nBlue, small and wood chair:");
-            CreateChair(woodFactory, Color.Blue, ProductSize.Small);
+            CreateChair(ProductMaterial.Wood, Color.Blue, ProductSize.Small);
             Console.WriteLine("\nBlack, medium and wood table:");
-            CreateTable(woodFactory, Color.Black, ProductSize.Medium);
+            CreateTable(ProductMaterial.Wood, Color.Black, ProductSize.Medium);
 
             Console.WriteLine("\nRed, small and metal chair:");
-            CreateChair(metalFactory, Color.Red, ProductSize.Small);
+            CreateChair(ProductMaterial.Metal, Color.Red, ProductSize.Small);
             Console.WriteLine("\nWhite, large and metal table:");
-            CreateTable(metalFactory, Color.White, ProductSize.Large);
+            CreateTable(ProductMaterial.Metal, Color.White, ProductSize.Large);
         }
 
-        private static void CreateChair(IHomeAndKitchenFactory factory, Color color, ProductSize size)
+        private static void CreateChair(ProductMaterial material, Color color, ProductSize size)
         {
+            var factory = HomeAndKitchenFactory.GetConcreteFactory(material);
             var chair = factory.CreateChair(color, size);
             PrintProductDetails(chair.Color, chair.Material, chair.Size);
         }
 
-        private static void CreateTable(IHomeAndKitchenFactory factory, Color color, ProductSize size)
+        private static void CreateTable(ProductMaterial material, Color color, ProductSize size)
         {
+            var factory = HomeAndKitchenFactory.GetConcreteFactory(material);
             var table = factory.CreateTable(color, size);
             PrintProductDetails(table.Color, table.Material, table.Size);
         }

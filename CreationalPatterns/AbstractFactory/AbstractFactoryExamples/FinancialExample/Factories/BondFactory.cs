@@ -6,14 +6,14 @@ using FinancialExample.Aggregates.Orders;
 
 namespace FinancialExample.Factories
 {
-    public class BondFactory : IFinancialFactory
+    public class BondFactory : FinancialFactory
     {
-        public Order CreateOrder()
+        public override Order CreateOrder()
         {
             return new BondOrder();
         }
 
-        public Deal CreateDeal()
+        public override Deal CreateDeal()
         {
             return new BondDeal();
         }

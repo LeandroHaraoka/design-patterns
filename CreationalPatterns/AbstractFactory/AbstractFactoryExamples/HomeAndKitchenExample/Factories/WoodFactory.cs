@@ -6,14 +6,14 @@ using System.Drawing;
 
 namespace HomeAndKitchenExample.Factories
 {
-    public class WoodFactory : IHomeAndKitchenFactory
+    public class WoodFactory : HomeAndKitchenFactory
     {
-        public Chair CreateChair(Color color, ProductSize size)
+        public override Chair CreateChair(Color color, ProductSize size)
         {
             return new WoodChair(color, size);
         }
 
-        public Table CreateTable(Color color, ProductSize size)
+        public override Table CreateTable(Color color, ProductSize size)
         {
             return new WoodTable(color, size);
         }
