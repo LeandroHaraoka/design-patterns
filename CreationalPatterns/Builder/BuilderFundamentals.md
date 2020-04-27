@@ -428,7 +428,7 @@ public class PersonAuxiliaryBuilder : PersonJobBuilder<PersonAuxiliaryBuilder>
 ```
 
 The class called PersonAuxiliaryBuilder is just a auxiliary class that will be used as builders return type.
-Client can now create a new Person object by calling the PersonAuxiliaryBuilder classes.
+Client can now create a new Person object by calling the PersonAuxiliaryBuilder methods.
 
 ```
 var person = new PersonAuxiliaryBuilder()
