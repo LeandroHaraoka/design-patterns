@@ -354,6 +354,92 @@ public class InitializedNameState : INameState
 
 If the client tries to build a person with no name, the NameState machine will throw an InvalidOperationException. In other words, the Infite State Machine decided to throw this exception, not the Builder.
 
+## Builder Inheritance with Recursive Generics
+
+Ocasionally it'll be necessary to create an inheritance from existing builder. If you just try to inherit the super class builder, it will not work, because the super class methods do not return the derived builder type.
+
+Suppose we have the following scenario: an entity Person with name, age and job position.
+For building a person object with name and age we have a PersonInfoBuilder. But, we want to build a person with also a job position value. So we have a derived PersonJobBuilder. We can not just derive, because PersonInfoBuilder.WithName() would return a PersonInfoBuilder, not a PersonJobBuilder.
+
+```
+public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public string Position { get; set; }
+}
+```
+```
+public abstract class PersonBuilder
+{
+    protected Person _person;
+
+    public PersonBuilder()
+    {
+        _person = new Person();
+    }
+
+    public Person Build()
+    {
+        return _person;
+    }
+}
+```
+```
+public class PersonInfoBuilder<TBuilder> : PersonBuilder
+    where TBuilder : PersonInfoBuilder<TBuilder>
+{
+    public TBuilder WithName(string name)
+    {
+        _person.Name = name;
+        return (TBuilder) this;
+    }
+
+    public TBuilder WithAge(int age)
+    {
+        _person.Age = age;
+        return (TBuilder) this;
+    }
+}
+```
+
+Note that we added a recursive generic constraint for PersonInfoBuilder. The generic parameter TBuilder will be an anemic Auxiliary Builder class, that will be returned by all methods from all builders classes of the inheritance tree.
+
+The derived PersonJobBuilder will necessary inherits from PersonInfoBuilder of TBuilder as defined in the above constraint.
+
+```
+public class PersonJobBuilder<TBuilder> : PersonInfoBuilder<TBuilder>
+    where TBuilder : PersonJobBuilder<TBuilder>
+{
+    public TBuilder WorkAs(string position)
+    {
+        _person.Position = position;
+        return (TBuilder) this;
+    }
+}
+```
+
+Note that we replicated the recursive generic in PersonJobBuilder class. So, we can still continue the inheritance tree from this class. We'll now create the PersonAuxiliaryBuilder class (to use as TBuilder) that inherits from PersonJobBuilder of PersonAuxiliaryBuilder.
+
+```
+public class PersonAuxiliaryBuilder : PersonJobBuilder<PersonAuxiliaryBuilder>
+{
+}
+```
+
+The class called PersonAuxiliaryBuilder is just a auxiliary class that will be used as builders return type.
+Client can now create a new Person object by calling the PersonAuxiliaryBuilder classes.
+
+```
+var person = new PersonAuxiliaryBuilder()
+    .WithName("Leandro")
+    .WithAge(25)
+    .WorkAs("Developer")
+    .Build();
+```
+
+To create a new derived builder just continue with the recursive generic mechanism.
+
 ## References
 
 https://refactoring.guru/design-patterns/builder
@@ -361,3 +447,5 @@ https://refactoring.guru/design-patterns/builder
 https://refactoring.guru/design-patterns/builder/csharp/example
 
 Pluralsight Course: *Tactical Design Patterns in .NET: Creating Objects - Returning to Concrete Classes with the Builder Pattern*. By Zoran Horvat.
+
+Udemy Course: *Design Patterns in C# and .NET - Fluent Builder Inheritance with Recursive Generics*. By Dmitri Nesteruk.
