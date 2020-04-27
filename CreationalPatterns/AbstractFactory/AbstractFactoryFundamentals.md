@@ -96,6 +96,7 @@ public abstract class HomeAndKitchenFactory
 {
     public static HomeAndKitchenFactory GetConcreteFactory(ProductMaterial material)
     {
+        // This instruction does not work according to Open/Closed Principle. Maybe it's a better idea to turn it into a collection with all available factories identified by their classes names.
         switch (material)
         {
             case ProductMaterial.Wood: return new WoodFactory();
