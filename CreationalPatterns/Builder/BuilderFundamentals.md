@@ -449,3 +449,7 @@ https://refactoring.guru/design-patterns/builder/csharp/example
 Pluralsight Course: *Tactical Design Patterns in .NET: Creating Objects - Returning to Concrete Classes with the Builder Pattern*. By Zoran Horvat.
 
 Udemy Course: *Design Patterns in C# and .NET - Fluent Builder Inheritance with Recursive Generics*. By Dmitri Nesteruk.
+
+## TODOs
+
+Check functional building and facade building from Dmitri Nesteruk course.
