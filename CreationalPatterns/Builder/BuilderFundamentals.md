@@ -440,6 +440,78 @@ var person = new PersonAuxiliaryBuilder()
 
 To create a new derived builder just continue with the recursive generic mechanism.
 
+## Functional Builder
+
+There is another way to extend builders behaviours. Consider the same Person class from the last example.
+
+We can implement a FunctionalBuilder, as below, that will store all necessary functions and arguments  to create a Person.
+
+```
+public abstract class FunctionalBuilder<TBuilder>
+    where TBuilder : FunctionalBuilder<TBuilder>
+{
+    private readonly List<Func<Person, Person>> _builderFunctions =
+        new List<Func<Person, Person>>();
+
+    public TBuilder Do(Action<Person> action)
+        => AddAction(action);
+
+    public Person Build()
+        => _builderFunctions.Aggregate(new Person(), (entity, action) => action(entity));
+
+    private TBuilder AddAction(Action<Person> action)
+    {
+        _builderFunctions.Add(builderFunction);
+        return (TBuilder) this;
+
+        Person builderFunction(Person p)
+        {
+            action(p);
+            return p;
+        }
+    }
+}
+```
+
+Now, when the client calls PersonBuilder methods, it will just create an action (with provided arguments) convert it into a function and store it at _builderFunctions. When the client calls Build method, all the stored functions will be executed by Aggregate method and the result will be the created Person.
+
+```
+public sealed class PersonBuilder
+    : FunctionalBuilder<PersonBuilder>
+{
+    public PersonBuilder Called(string name)
+        => Do(p => p.Name = name);
+
+    public PersonBuilder WithAge(int age)
+        => Do(p => p.Age = age);
+}
+```
+
+If necessary, we can create an extension method to introduce new steps for the Person object construction.
+
+```
+public static class PersonBuilderExtensions
+{
+    public static PersonBuilder WorkAs(this PersonBuilder personBuilder, string position)
+        => personBuilder.Do(p => p.Position = position);
+}
+```
+
+Consider the example below.
+
+```
+static void Main(string[] args)
+{
+    var person = new PersonBuilder()
+        .Called("Leandro")
+        .WithAge(25)
+        .WorkAs("Developer")
+        .Build();
+}
+```
+
+When the client calls Called("Leandro") the PersonBuilder will create an action ```p => p.Name = "Leandro"``` and send it to Do method. This method will create a function that applies ```Name = "Leandro"``` to the person object and return the updated object. This funtion will be stored. This will happen consecutively until the Build method call, when all functions are indeed executed and the result is the final object.
+
 ## References
 
 https://refactoring.guru/design-patterns/builder
