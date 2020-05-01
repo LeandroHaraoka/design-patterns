@@ -12,7 +12,7 @@ namespace PrototypeCompleteExample.People
 
         public Person CreatePerson(string registryName)
         {
-            return _registry.GetValueOrDefault(registryName);
+            return _registry.GetValueOrDefault(registryName).DeepCopy<Person>();
         }
 
         private void LoadPeopleRegistry()
