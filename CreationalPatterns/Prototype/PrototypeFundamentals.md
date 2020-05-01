@@ -10,6 +10,10 @@ We'll present different ways to implement the Prototype pattern and solve the ab
 
 ## Show me the code
 
+The Prototype pattern suggests the below diagram implementation.
+
+![Prototype Pattern Diagram ](Images/Prototype.png)
+
 - First we create the abstraction called Prototype, that contains only methods related to the clone process. In most cases, it’s a single clone method, but in this example we'll have show different types of clone.
 
 ```
@@ -112,6 +116,10 @@ static void Main(string[] args)
 
 Frequently an IClonable interface is used at the Prototype Pattern. The interface has a single Clone() method that return an object.
 
+The Prototype pattern using IClonable example follows the below diagram.
+
+![Clonable Prototype Pattern Diagram ](Images/ClonablePrototype.png)
+
  - The implementation is similar to the previous example, but we have a single cloning method. You can decided between shallow and deep copy implementation.
 
 ```
@@ -172,6 +180,8 @@ Some considerations of IClonable implementation:
 ## Prototype Registry
 
 The previous examples uses an instance passed by the client to generate a prototype for a new instance. Often it's interesting to create pre-built prototypes that are ready to be cloned. This example presents a Prototype Registry, that contains a set of pre defined prototypes and provide it to the client.
+
+![Prototype Registry Pattern Diagram ](Images/PrototypeRegistry.png)
 
 - We still have a Prototype abstraction, but it performs only deep copies.
 
