@@ -18,7 +18,7 @@ The diagram resumes what was said above.
 
 ## Show me the code
 
- - The factory abstraction contains methods signatures for creating three (just to enrich the example) different categories smartphones. So, for a specific brand, the client cans create an instance of a low cost, a hyped and a luxurious smartphone. These interface methods will have a specific implementation for each concrete factory. They are called factory methods.
+ - The factory abstraction contains methods signatures for creating three (just to enrich the example) different categories smartphones. So, for a specific brand, the client can create an instance of a low cost, a hyped and a luxurious smartphone. These interface methods will have a specific implementation for each concrete factory. They are called factory methods.
 
  - Factory methods return an abstraction of the product for the client. These methods can also have a default implementation.
 
@@ -135,7 +135,7 @@ private static void PrintSmartphoneInfo(Smartphone smartphone)
 
  - You need an abstraction for differents implementations of an object construction.
 
- - Oftenlly, Factory Method is implemented joining Abstract Factory pattern. When you have multiple Product abstractions that should be created you can catch yourself applying factory method pattern for each one of them. If the products can be grouped into families, maybe it's a better ideia to use Abstract Factory. For example, instead of having one Factory method for SamsungSmartphone, one for SamsungNotebook and one for SamsungTelevision, you should have a SamsungFactory that creates all the three products.
+ - Often, Factory Method is implemented joining Abstract Factory pattern. When you have multiple Product abstractions that should be created you can catch yourself applying factory method pattern for each one of them. If the products can be grouped into families, maybe it's a better ideia to use Abstract Factory. For example, instead of having one Factory method for SamsungSmartphone, one for SamsungNotebook and one for SamsungTelevision, you should have a SamsungFactory that creates all the three products.
 
 ## Advantages
 
@@ -153,7 +153,7 @@ private static void PrintSmartphoneInfo(Smartphone smartphone)
 
 https://www.codeproject.com/Articles/35789/Understanding-Factory-Method-and-Abstract-Factory
 
-https://www.codeproject.com/Articles/35789/Understanding-Factory-Method-and-Abstract-Factory
+https://refactoring.guru/design-patterns/factory-method
 
 Pluralsight Course: *Tactical Design Patterns in .NET: Creating Objects - Factory Method by the Book*. By Zoran Horvat.
 
