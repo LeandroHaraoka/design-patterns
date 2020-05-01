@@ -20,15 +20,15 @@ namespace SmartphoneFactoryExample
         private static void CreateAllSmartphones(ISmartphoneFactory smartphoneFactory)
         {
             var lowCostSmartphone = smartphoneFactory.CreateLowCost();
-            PrintBondCreditInfo(lowCostSmartphone);
+            PrintSmartphoneInfo(lowCostSmartphone);
             var hypedSmartphone = smartphoneFactory.CreateHyped();
-            PrintBondCreditInfo(hypedSmartphone);
+            PrintSmartphoneInfo(hypedSmartphone);
             var luxuriousSmartphone = smartphoneFactory.CreateLuxurious();
-            PrintBondCreditInfo(luxuriousSmartphone);
+            PrintSmartphoneInfo(luxuriousSmartphone);
 
         }
 
-        private static void PrintBondCreditInfo(Smartphone smartphone)
+        private static void PrintSmartphoneInfo(Smartphone smartphone)
         {
             Console.WriteLine($"\nSmartphone:");
             Console.WriteLine($"    Name: {smartphone.Name}");
