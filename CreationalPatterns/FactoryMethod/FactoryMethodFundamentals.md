@@ -129,7 +129,7 @@ private static void PrintSmartphoneInfo(Smartphone smartphone)
 
 ## Use cases
 
- - Use a Factory Method when
+ - Use a Factory Method when:
 
  - A class can't anticipate the class of objects it must create. For example, according to an enumerator value it will use a specific factory method.
 

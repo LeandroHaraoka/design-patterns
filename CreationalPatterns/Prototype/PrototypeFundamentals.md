@@ -8,11 +8,11 @@ Suppose the client of your code asks for creating new a Person registry. You can
 
 We'll present different ways to implement the Prototype pattern and solve the above problem.
 
-## Show me the code
-
 The Prototype pattern suggests the below diagram implementation.
 
 ![Prototype Pattern Diagram ](Images/Prototype.png)
+
+## Show me the code
 
 - First we create the abstraction called Prototype, that contains only methods related to the clone process. In most cases, it’s a single clone method, but in this example we'll have show different types of clone.
 
