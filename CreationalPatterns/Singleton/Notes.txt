@@ -1,0 +1,68 @@
+Refactoring Guru -------------------------------------------------------------------------------------------------------
+
+Identification: Singleton can be recognized by a static creation method, which returns the same cached object.
+Single instance with global access
+Cannot use constructor, constructor always return new object
+
+Implementation
+Make construct private to avoid new instances
+Static method that calls constructor and stores instance in a static field. Following calls return the cached object
+
+Tips
+Singleton does not requires dependency injection.
+
+Sometimes considered an antipattern
+
+Advatgs
+Ensure single instance
+Global access
+Lazy initialization
+
+Disadvantages
+Violates SRP: single instance and global access
+Requires special treatment in multithread environment, as different threads can create differentes instances
+Cannot mock static method that return the instance
+
+Relations with other patterns
+Abstract factories, builders and prototypes can be singleton
+
+Todos: relate with other patterns
+
+Examples
+
+Basic Not ThreadSafe Example
+Basic ThreadSafe Example
+
+Udemy Dmitri -------------------------------------------------------------------------------------------------------
+
+Uses
+Database repository
+Object factory
+Prevent additional copies
+Take care of lazy instantiation and thread safety
+
+Lazy Singleton with interface Example
+Showing test issues example (static database instance cannot be override)
+Solving test issue with dependecy injection to mock the singleton instance.
+Monostate Pattern (singleton variant) example
+
+Heads First --------------------------------------------------------------------------------------------------------
+Thread pools, caches, dialog boxes, objects that handle preferences and registry settings, objects used for logging, and
+objects that act as device drivers to devices like printers and graphics cards.
+
+If you’ve got a good handle on static class variables and methods as well as access modifiers, it’s not.
+But, in either case, it is interesting to see how a Singleton works, and, as simple as it sounds, Singleton code is
+hard to get right. Just ask yourself: how do I prevent more than one object from being instantiated?
+
+Note that if we never need the instance, it never gets created; this is lazy instantiation.
+
+Multithread example page 181
+
+Volatile keyword
+https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/volatile
+https://www.c-sharpcorner.com/UploadFile/1d42da/volatile-keyword-in-C-Sharp-threading/
+When multiple threads execute at once, this can cause serious problems. Please keep in mind that the volatile modifier does not force synchronization of loads and stores; instead it simply tells the compiler not to change the order of accesses to the field. By eliminating reordering optimizations, the code becomes more predictable from a programmer's perspective.
+Uses:
+Marking a local variable in the scope of a setjmp so that the variable does not rollback after a longjmp
+Memory that is modified by an external agent or appears to be because of a screwy memory mapping
+Signal handler mischief.
