@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ThreadSafeExample.Database
 {
-    public class SingletonDatabase : IDatabase
+    public class SingletonDatabase
     {
         private static SingletonDatabase _instance;
         private static IDictionary<string, CountryPopulation> _countriesPopulation;

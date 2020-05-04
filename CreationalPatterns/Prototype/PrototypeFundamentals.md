@@ -328,7 +328,7 @@ each time with the appropriate state.
 
 https://refactoring.guru/design-patterns/prototype
 
-Pluralsight Course: *Design Patterns in Java Creational - Demo: Prototype*. By Zoran Horvat.
+Pluralsight Course: *Design Patterns in Java Creational - Demo: Prototype*. By Bryan Hansen.
 
 Pluralsight Course: *C# Design Patterns: Prototype*. By Harrison Ferrone.
 

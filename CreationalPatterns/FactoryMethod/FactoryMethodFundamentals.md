@@ -157,6 +157,6 @@ https://refactoring.guru/design-patterns/factory-method
 
 Pluralsight Course: *Tactical Design Patterns in .NET: Creating Objects - Factory Method by the Book*. By Zoran Horvat.
 
-Pluralsight Course: *Design Patterns in Java Creational - Demo: Factory*. By Zoran Horvat.
+Pluralsight Course: *Design Patterns in Java Creational - Demo: Factory*. By Bryan Hansen.
 
 Udemy Course: *Design Patterns in C# and .NET - Factories Methods*. By Dmitri Nesteruk.
