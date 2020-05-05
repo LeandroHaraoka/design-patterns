@@ -1,15 +1,15 @@
 Refactoring Guru -------------------------------------------------------------------------------------------------------
 
-Identification: Singleton can be recognized by a static creation method, which returns the same cached object.
-Single instance with global access
-Cannot use constructor, constructor always return new object
+--Identification: Singleton can be recognized by a static creation method, which returns the same cached object.
+--Single instance with global access
+--Cannot use constructor, constructor always return new object
 
 Implementation
-Make construct private to avoid new instances
-Static method that calls constructor and stores instance in a static field. Following calls return the cached object
+--Make construct private to avoid new instances
+--Static method that calls constructor and stores instance in a static field. Following calls return the cached object
 
 Tips
-Singleton does not requires dependency injection.
+-Singleton does not requires dependency injection.
 
 Sometimes considered an antipattern
 
@@ -47,14 +47,14 @@ Solving test issue with dependecy injection to mock the singleton instance.
 Monostate Pattern (singleton variant) example
 
 Heads First --------------------------------------------------------------------------------------------------------
-Thread pools, caches, dialog boxes, objects that handle preferences and registry settings, objects used for logging, and
-objects that act as device drivers to devices like printers and graphics cards.
+--Thread pools, caches, dialog boxes, objects that handle preferences and registry settings, objects used for logging, and
+--objects that act as device drivers to devices like printers and graphics cards.
 
 If you’ve got a good handle on static class variables and methods as well as access modifiers, it’s not.
 But, in either case, it is interesting to see how a Singleton works, and, as simple as it sounds, Singleton code is
 hard to get right. Just ask yourself: how do I prevent more than one object from being instantiated?
 
-Note that if we never need the instance, it never gets created; this is lazy instantiation.
+--Note that if we never need the instance, it never gets created; this is lazy instantiation.
 
 Multithread example page 181
 
