@@ -13,19 +13,19 @@ namespace HomeEventsExample.Events
         public void GoToWork()
         {
             Console.WriteLine("\nPerson is going to work.");
-            LeftHome?.Invoke(this, null);
+            LeftHome?.Invoke(this, EventArgs.Empty);
         }
 
         public void LeaveWork()
         {
             Console.WriteLine("\nPerson is coming back to home.");
-            LeftWork?.Invoke(this, null);
+            LeftWork?.Invoke(this, EventArgs.Empty);
         }
 
         public void ArriveAtHome()
         {
             Console.WriteLine("\nPerson arrived at home.");
-            ArrivedAtHome?.Invoke(this, null);
+            ArrivedAtHome?.Invoke(this, EventArgs.Empty);
         }
 
 
