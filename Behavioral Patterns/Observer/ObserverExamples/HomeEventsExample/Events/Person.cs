@@ -27,7 +27,5 @@ namespace HomeEventsExample.Events
             Console.WriteLine("\nPerson arrived at home.");
             ArrivedAtHome?.Invoke(this, EventArgs.Empty);
         }
-
-
     }
 }
