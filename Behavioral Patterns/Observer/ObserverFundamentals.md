@@ -4,6 +4,8 @@ Define a one-to-many dependency between objects so that when one object changes 
 
 The Observer Pattern is useful for solutions in which an object, called subject, controls a list of dependents, called observers, and notifies them every state change. For example: a newspaper publisher starts its own business and sends newspapers for each subscriber. Every new edition, the subscribers will automatically receive the newspaper, as long as the subscription is activated. New subscribers starts receiveing the updates as soon as the subscription is activated.
 
+This interaction is commonly known as publish-subscribe. The subject publishes its notifications to all subscribed observers.
+
 ## Problem
 
 Suppose an application must monitor a generic stock price and update a display every price change.
@@ -512,3 +514,32 @@ static void Main(string[] args)
 ```
 
 ![Bidirectional Binding Example Output ](Images/BidirectionalBinding.png)
+
+## Use cases
+
+Use an Observer when:
+
+- The application requires maintaining consistency between objects, like different windows that shows the same variables.
+- A change to one object causes effects to others and we don't know how many objects will be affected in the future.
+- The publisher must be decoupled from its subscribers.
+- An object must perform a broadcast for many consumers.
+- It's commonly used in event handling
+
+## Advantages
+
+- It's easy to subscribe a new observer to an existing observable object. It satisfies the Open/Closed Principle.
+- The subject only knows how to notify the observers, it has no knowledge about the concrete observers.
+- New subscriptions can be created at runtime.
+
+## Disadvantages
+- Bad implementations can cause a messy broadcast, as it can create a cascade of updates in a scenario with many dependencies.
+- The implementations do not ensure any notification order. If the observers have a specific order to be notified, the implementation will have to be reconsidered.
+
+## Tips
+Don’t depend on a specific order of notification for your Observers.
+Don’t be afraid to create your own Observable implementation if needed.
+
+## References
+
+## TODOs
+Pluralsight Design Patterns in Java: Comparison with Mediator
