@@ -1,7 +1,5 @@
 ﻿using LoanProposalExample.Handlers;
 using LoanProposalExample.LoanProposals;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 
 namespace LoanProposalExample
