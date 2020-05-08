@@ -1,10 +1,10 @@
-﻿using ChainOfResponsibilityExamples.Clients;
-using ChainOfResponsibilityExamples.LoanProposals;
+﻿using LoanProposalExample.Clients;
+using LoanProposalExample.LoanProposals;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ChainOfResponsibilityExamples.Handlers
+namespace LoanProposalExample.Handlers
 {
     public class ClientCreditRiskHandler : LoanProposalHandler
     {

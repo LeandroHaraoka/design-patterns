@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ChainOfResponsibilityExamples.Clients
+namespace LoanProposalExample.Clients
 {
     public enum CreditRisk
     {

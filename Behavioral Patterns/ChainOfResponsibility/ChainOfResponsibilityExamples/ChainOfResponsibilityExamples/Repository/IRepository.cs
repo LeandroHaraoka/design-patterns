@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ChainOfResponsibilityExamples.Repository
+namespace LoanProposalExample.Repository
 {
     public interface IRepository<T>
     {

@@ -1,7 +1,7 @@
-﻿using ChainOfResponsibilityExamples.BankAccounts;
+﻿using LoanProposalExample.BankAccounts;
 using System;
 
-namespace ChainOfResponsibilityExamples.Clients
+namespace LoanProposalExample.Clients
 {
     public class Client
     {

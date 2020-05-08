@@ -1,9 +1,9 @@
-﻿using ChainOfResponsibilityExamples.BankAccounts;
+﻿using LoanProposalExample.BankAccounts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ChainOfResponsibilityExamples.Repository
+namespace LoanProposalExample.Repository
 {
     public class BankAccountRepository : IRepository<BankAccount>
     {

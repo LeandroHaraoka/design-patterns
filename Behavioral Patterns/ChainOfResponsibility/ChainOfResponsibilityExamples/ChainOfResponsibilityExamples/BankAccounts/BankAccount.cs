@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ChainOfResponsibilityExamples.BankAccounts
+namespace LoanProposalExample.BankAccounts
 {
     public class BankAccount
     {

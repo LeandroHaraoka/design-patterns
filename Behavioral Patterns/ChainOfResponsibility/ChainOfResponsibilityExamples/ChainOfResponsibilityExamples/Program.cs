@@ -1,8 +1,10 @@
-﻿using ChainOfResponsibilityExamples.Handlers;
-using ChainOfResponsibilityExamples.LoanProposals;
+﻿using LoanProposalExample.Handlers;
+using LoanProposalExample.LoanProposals;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 
-namespace ChainOfResponsibilityExamples
+namespace LoanProposalExample
 {
     class Program
     {
@@ -20,7 +22,9 @@ namespace ChainOfResponsibilityExamples
 
             var loanProposal = new LoanProposal(new Guid("406acba3-4b4c-4879-b13c-1a019f0c27f1"), 1500);
             
-            handler.Handle(loanProposal);
+            var sentLoanProposal = handler.Handle(loanProposal);
+
+            Console.WriteLine(sentLoanProposal);
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using ChainOfResponsibilityExamples.LoanProposals;
-using ChainOfResponsibilityExamples.Repository;
+﻿using LoanProposalExample.LoanProposals;
+using LoanProposalExample.Repository;
 using System;
 using System.Linq;
 
-namespace ChainOfResponsibilityExamples.Handlers
+namespace LoanProposalExample.Handlers
 {
     public class BankAccountHandler : LoanProposalHandler
     {

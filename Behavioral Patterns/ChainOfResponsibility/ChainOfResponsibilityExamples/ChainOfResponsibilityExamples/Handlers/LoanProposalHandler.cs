@@ -1,7 +1,7 @@
-﻿using ChainOfResponsibilityExamples.LoanProposals;
+﻿using LoanProposalExample.LoanProposals;
 using System;
 
-namespace ChainOfResponsibilityExamples.Handlers
+namespace LoanProposalExample.Handlers
 {
     public abstract class LoanProposalHandler : IHandler<LoanProposal> 
     {

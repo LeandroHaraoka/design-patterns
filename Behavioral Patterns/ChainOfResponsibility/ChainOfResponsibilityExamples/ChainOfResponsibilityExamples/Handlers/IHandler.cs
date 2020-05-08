@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ChainOfResponsibilityExamples.Handlers
+namespace LoanProposalExample.Handlers
 {
     public interface IHandler<T>
     {

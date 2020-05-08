@@ -1,9 +1,9 @@
-﻿using ChainOfResponsibilityExamples.Clients;
+﻿using LoanProposalExample.Clients;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ChainOfResponsibilityExamples.Repository
+namespace LoanProposalExample.Repository
 {
     public class ClientRepository : IRepository<Client>
     {

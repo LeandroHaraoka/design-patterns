@@ -1,9 +1,12 @@
-﻿using ChainOfResponsibilityExamples.Clients;
+﻿using LoanProposalExample.Clients;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ChainOfResponsibilityExamples.LoanProposals
+namespace LoanProposalExample.LoanProposals
 {
     public class LoanProposal
     {
@@ -16,6 +19,15 @@ namespace ChainOfResponsibilityExamples.LoanProposals
         {
             ClientId = clientId;
             Amount = amount;
+        }
+
+        public override string ToString()
+        {
+            var serializedLoanProposal = JsonConvert.SerializeObject(this, new StringEnumConverter());
+
+            var loanProposalAsJToken = JToken.Parse(serializedLoanProposal);
+
+            return loanProposalAsJToken.ToString(Formatting.Indented);
         }
     }
 }
