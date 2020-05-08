@@ -29,9 +29,8 @@ namespace FashionShopExample.Items
 
     public enum ItemNames
     {
-        Hat,
-        Jeans,
         Shirt,
+        Jeans,
         Sunglasses
     }
 }

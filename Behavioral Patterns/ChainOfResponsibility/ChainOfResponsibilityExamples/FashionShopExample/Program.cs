@@ -51,7 +51,5 @@ namespace FashionShopExample
             var dailySale = new DailySale(discountApplier);
             dailySale.Add();
         }
-
-
     }
 }
