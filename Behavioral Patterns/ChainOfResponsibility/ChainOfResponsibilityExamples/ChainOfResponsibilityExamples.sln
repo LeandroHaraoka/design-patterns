@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoanProposalExample", "LoanProposalExample\LoanProposalExample.csproj", "{DDBB6C1D-D882-414A-A1D6-51C15F685856}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoanProposalExample", "LoanProposalExample\LoanProposalExample.csproj", "{DDBB6C1D-D882-414A-A1D6-51C15F685856}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FashionShopExample", "FashionShopExample\FashionShopExample.csproj", "{12AC32C5-B3B9-4E0B-832B-0ECF68FE56F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{DDBB6C1D-D882-414A-A1D6-51C15F685856}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDBB6C1D-D882-414A-A1D6-51C15F685856}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDBB6C1D-D882-414A-A1D6-51C15F685856}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12AC32C5-B3B9-4E0B-832B-0ECF68FE56F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12AC32C5-B3B9-4E0B-832B-0ECF68FE56F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12AC32C5-B3B9-4E0B-832B-0ECF68FE56F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12AC32C5-B3B9-4E0B-832B-0ECF68FE56F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

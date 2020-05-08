@@ -9,7 +9,7 @@ namespace LoanProposalExample
         static void Main(string[] args)
         {
             Console.WriteLine("Chain of Responsibility");
-            Console.WriteLine("Chain of Responsibility Example");
+            Console.WriteLine("Loan Proposal Example");
 
             var handler = new ClientInfoHandler();
             var clientCreditRiskHandler = new ClientCreditRiskHandler();
