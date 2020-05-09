@@ -2,7 +2,7 @@
 
 Avoid coupling the sender of a request to its receiver by giving more than one object a chance to handle the request. Chain the receiving objects and pass the request along the chain until an object handles it.
 
-TODO: Diagram
+![Chain Of Responsibility Diagram](Images/ChainOfResponsibility.png)
 
 ## Problem
 
@@ -11,6 +11,10 @@ Suppose a financial institution needs to send a loan contract proposal to its cl
 - Gets the loan rate defined by the client credit risk, that is informed by a third-party service.
 - Verify if the client bank account balance satisfies loans threashold.
 - Send a file with the created proposal.
+
+So, these steps can be implemented satisfying their sequencial order using a chain of resposibility as presented by the below diagram.
+
+![Chain Of Responsibility Example Diagram ](Images/ChainOfResponsibilityExample.png)
 
 ## Show me the code
 
@@ -429,6 +433,7 @@ public abstract class Item
 Now, we have prepared our chain that handles all discounts. So let's create some implementations.
 
 As introduced before, we'll have three items.
+
 ```csharp
 public enum ItemNames
 {
@@ -573,6 +578,7 @@ Use a Chain of Responsibilities when:
 - If well designed it satisfies Single Responsibility Principle.
 
 ## Disadvantages
+
 - This pattern does not ensure that a request will be handled. It can arrive at the end of the chain without being handled (sometimes it's a desired behavior).
 
 ## References
@@ -586,7 +592,3 @@ Pluralsight Course: *Design Patterns On-Ramp - Patterns You Already Use: Chain o
 Pluralsight Course: *C# Design Patterns: Chain of Responsibility*. By Filip Ekberg.
 
 Udemy Course: *Design Patterns in C# and .NET - Chain of Responsibility*. By Dmitri Nesteruk.
-
-## TODO:
-
-Diagram
