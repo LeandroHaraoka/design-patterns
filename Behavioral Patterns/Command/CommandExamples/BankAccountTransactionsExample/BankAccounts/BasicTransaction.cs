@@ -2,9 +2,9 @@
 
 namespace BankAccountTransactionsExample.BankAccounts
 {
-    public class ConcreteTransaction : Transaction
+    public class BasicTransaction : Transaction
     {
-        public ConcreteTransaction(BankAccount bankAccount, Transactions transactions, double volume, Guid identifier) 
+        public BasicTransaction(BankAccount bankAccount, Transactions transactions, double volume, Guid identifier) 
             : base(bankAccount, transactions, volume, identifier)
         {
         }

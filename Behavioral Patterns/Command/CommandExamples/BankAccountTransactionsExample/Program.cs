@@ -14,10 +14,10 @@ namespace BankAccountTransactionsExample
             var transactionmanager = new TransactionManager();
             var bankAccount = new BankAccount();
 
-            var firstTransaction = new ConcreteTransaction(bankAccount, Deposit, 10000, Guid.NewGuid());
-            var secondTransaction = new ConcreteTransaction(bankAccount, Deposit, 2000, Guid.NewGuid());
-            var thirdTransaction = new ConcreteTransaction(bankAccount, Withdrawal, 3000, Guid.NewGuid());
-            var fourthTransaction = new ConcreteTransaction(bankAccount, Deposit, 5000, Guid.NewGuid());
+            var firstTransaction = new BasicTransaction(bankAccount, Deposit, 10000, Guid.NewGuid());
+            var secondTransaction = new BasicTransaction(bankAccount, Deposit, 2000, Guid.NewGuid());
+            var thirdTransaction = new BasicTransaction(bankAccount, Withdrawal, 3000, Guid.NewGuid());
+            var fourthTransaction = new BasicTransaction(bankAccount, Deposit, 5000, Guid.NewGuid());
 
             SendTransaction(firstTransaction);
             SendTransaction(secondTransaction);
