@@ -1,5 +1,6 @@
-﻿using BankAccountTransactionsExample.BankAccounts;
-using System;
+﻿using System;
+using BankAccountTransactionsExample.BankAccounts;
+using static BankAccountTransactionsExample.BankAccounts.Transactions;
 
 namespace BankAccountTransactionsExample
 {
@@ -13,10 +14,10 @@ namespace BankAccountTransactionsExample
             var transactionmanager = new TransactionManager();
             var bankAccount = new BankAccount();
 
-            var firstTransaction = new ConcreteTransaction(bankAccount, '+', 10000, Guid.NewGuid());
-            var secondTransaction = new ConcreteTransaction(bankAccount, '+', 2000, Guid.NewGuid());
-            var thirdTransaction = new ConcreteTransaction(bankAccount, '-', 1000, Guid.NewGuid());
-            var fourthTransaction = new ConcreteTransaction(bankAccount, '+', 5000, Guid.NewGuid());
+            var firstTransaction = new ConcreteTransaction(bankAccount, Deposit, 10000, Guid.NewGuid());
+            var secondTransaction = new ConcreteTransaction(bankAccount, Deposit, 2000, Guid.NewGuid());
+            var thirdTransaction = new ConcreteTransaction(bankAccount, Withdrawal, 3000, Guid.NewGuid());
+            var fourthTransaction = new ConcreteTransaction(bankAccount, Deposit, 5000, Guid.NewGuid());
 
             SendTransaction(firstTransaction);
             SendTransaction(secondTransaction);
@@ -29,13 +30,12 @@ namespace BankAccountTransactionsExample
             void SendTransaction(Transaction transaction)
             {
                 transactionmanager.SendTransaction(transaction);
-                Console.WriteLine($"New Balance: $ {bankAccount.Balance}\n");
+                
             }
 
             void CancelTransaction(Guid transactionIdentifier)
             {
                 transactionmanager.CancelTransaction(transactionIdentifier);
-                Console.WriteLine($"New Balance: $ {bankAccount.Balance}\n");
             }
         }
     }

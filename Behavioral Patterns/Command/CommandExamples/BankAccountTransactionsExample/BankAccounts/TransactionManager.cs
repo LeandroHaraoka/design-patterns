@@ -18,7 +18,12 @@ namespace BankAccountTransactionsExample.BankAccounts
         public void CancelTransaction(Guid guid)
         {
             var transaction = _transactions.Single(t => t._identifier == guid);
-            transaction.Cancel();
+
+            if (transaction._isExecuted == true)
+            {
+                transaction.Cancel();
+                transaction._isExecuted = false;
+            }
         }
     }
 }

@@ -4,8 +4,8 @@ namespace BankAccountTransactionsExample.BankAccounts
 {
     public class ConcreteTransaction : Transaction
     {
-        public ConcreteTransaction(BankAccount bankAccount, char direction, double volume, Guid identifier) 
-            : base(bankAccount, direction, volume, identifier)
+        public ConcreteTransaction(BankAccount bankAccount, Transactions transactions, double volume, Guid identifier) 
+            : base(bankAccount, transactions, volume, identifier)
         {
         }
     }
