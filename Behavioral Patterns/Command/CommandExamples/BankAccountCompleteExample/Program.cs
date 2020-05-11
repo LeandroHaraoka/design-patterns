@@ -9,10 +9,10 @@ namespace CalculatorExample
         static void Main(string[] args)
         {
             Console.WriteLine("Command");
-            Console.WriteLine("Calculator Example");
+            Console.WriteLine("Calculator Example\n");
 
             var calculator = new Calculator();
-            var calculatorManager = new CalculatorManager(calculator);
+            var calculatorManager = new CalculatorManager();
 
             calculatorManager.Execute(new CalculatorOperation(calculator, Add, 1000));
             calculatorManager.Execute(new CalculatorOperation(calculator, Subtract, 200));

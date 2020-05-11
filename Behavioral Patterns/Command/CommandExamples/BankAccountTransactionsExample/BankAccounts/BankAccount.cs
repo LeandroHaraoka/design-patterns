@@ -6,21 +6,21 @@ namespace BankAccountTransactionsExample.BankAccounts
 {
     public class BankAccount
     {
-        private double _balance;
-        public double Balance { get => _balance; }
+        public double Balance { get; private set; }
 
-        public void Deposit(double volume) => _balance += volume;
+        public void Deposit(double volume) => Balance += volume;
 
         public bool Withdrawl(double volume)
         {
-            if (_balance < volume)
+            if (Balance < volume)
                 return false;
 
-            _balance -= volume;
+            Balance -= volume;
             return true;
         }
-        public void CancelDeposit(double volume) => _balance -= volume;
 
-        public void CancelWithdrawl(double volume) => _balance += volume;
+        public void CancelDeposit(double volume) => Balance -= volume;
+
+        public void CancelWithdrawl(double volume) => Balance += volume;
     }
 }

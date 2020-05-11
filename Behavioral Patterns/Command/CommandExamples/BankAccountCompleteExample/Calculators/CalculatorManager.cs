@@ -5,20 +5,15 @@ namespace CalculatorExample.Calculators
 {
     public class CalculatorManager
     {
-        private readonly Calculator _calculator;
-        private List<Command> calculatorHistory = new List<Command>();
+        private readonly List<Command> _calculatorHistory = new List<Command>();
         private int _current = 0;
 
-        public CalculatorManager(Calculator calculator)
-        {
-            _calculator = calculator;
-        }
         public void Execute(Command operationCommand)
         {
             operationCommand.Execute();
 
-            calculatorHistory.RemoveFrom(_current - 1);
-            calculatorHistory.Add(operationCommand);
+            _calculatorHistory.RemoveFrom(_current - 1);
+            _calculatorHistory.Add(operationCommand);
             _current++;
         }
 
@@ -26,7 +21,7 @@ namespace CalculatorExample.Calculators
         {
             if (_current > 0)
             {
-                var lastCommand = calculatorHistory[_current - 1];
+                var lastCommand = _calculatorHistory[_current - 1];
                 lastCommand.Undo();
                 _current--;
             }
@@ -34,9 +29,9 @@ namespace CalculatorExample.Calculators
 
         public void Redo()
         {
-            if (_current < calculatorHistory.Count)
+            if (_current < _calculatorHistory.Count)
             {
-                var nextCommand = calculatorHistory[_current];
+                var nextCommand = _calculatorHistory[_current];
                 nextCommand.Execute();
                 _current++;
             }

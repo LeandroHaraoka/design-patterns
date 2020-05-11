@@ -9,34 +9,21 @@ namespace BankAccountTransactionsExample
         static void Main(string[] args)
         {
             Console.WriteLine("Command");
-            Console.WriteLine("Bank Account Transactions Example");
+            Console.WriteLine("Bank Account Transactions Example\n");
 
             var transactionmanager = new TransactionManager();
             var bankAccount = new BankAccount();
 
-            var firstTransaction = new BasicTransaction(bankAccount, Deposit, 10000, Guid.NewGuid());
-            var secondTransaction = new BasicTransaction(bankAccount, Deposit, 2000, Guid.NewGuid());
-            var thirdTransaction = new BasicTransaction(bankAccount, Withdrawal, 3000, Guid.NewGuid());
-            var fourthTransaction = new BasicTransaction(bankAccount, Deposit, 5000, Guid.NewGuid());
+            var firstTransaction = new BasicTransaction(bankAccount, Deposit, 5000, Guid.NewGuid());
+            var lastTransaction = new BasicTransaction(bankAccount, Deposit, 2000, Guid.NewGuid());
 
-            SendTransaction(firstTransaction);
-            SendTransaction(secondTransaction);
-            SendTransaction(thirdTransaction);
-            SendTransaction(fourthTransaction);
+            transactionmanager.SendTransaction(firstTransaction);
+            transactionmanager.SendTransaction(new BasicTransaction(bankAccount, Deposit, 10000, Guid.NewGuid()));
+            transactionmanager.SendTransaction(new BasicTransaction(bankAccount, Withdrawal, 3000, Guid.NewGuid()));
+            transactionmanager.SendTransaction(lastTransaction);
 
-            CancelTransaction(firstTransaction._identifier);
-            CancelTransaction(secondTransaction._identifier);
-
-            void SendTransaction(Transaction transaction)
-            {
-                transactionmanager.SendTransaction(transaction);
-                
-            }
-
-            void CancelTransaction(Guid transactionIdentifier)
-            {
-                transactionmanager.CancelTransaction(transactionIdentifier);
-            }
+            transactionmanager.CancelTransaction(firstTransaction._identifier);
+            transactionmanager.CancelTransaction(lastTransaction._identifier);
         }
     }
 }
