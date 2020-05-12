@@ -309,7 +309,28 @@ foreach (var node in binaryTree)
 
 Output:
 
-![Bidirectional Iterator Example](Images/BidirectionalIteratorExample.png)
+![Binary Tree Example](Images/BinaryTreeExample.png)
+
+## Use Cases
+
+Use Iterator Pattern when:
+
+- You need to traverse a collection which type is unknown at compile time.
+- A collection can perform traversals in many ways.
+- To perform multiple traversal at the same time (each iterator stores its respective state)
+
+## Advantages
+
+- Decouples the client from the traverse logic, which allows iteration through aggregates which type is defined at runtime.
+- Satisfies Single Responsibility Principle as the traversal instructions are moved to a single place, the iterator.
+- Satisfies Open/Closed Principle as a new collection and its respective Iterator can be handled by existing code without modifying anything.
+- Allows customizing the traversal rules.
+- The Iterator relies on Factory Methods to create different kind of iterations.
+
+## Disadvantages
+
+- Simple structures may not need to use this pattern, it could result in an overkill complexity.
+- You can not update the collection you are iterating through, it's not a good idea.
 
 ## References
 
@@ -317,17 +338,10 @@ https://refactoring.guru/design-patterns/iterator
 
 https://jacekrojek.github.io/JacekRojek/2016/c-iterator-design-pattern/
 
-## TODO
+https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
 
-Is core functionality of various data structures.
-    Keeps a reference to the current element
-    Knows how to move to a different element
-    .NET automatically builds a state machine around yield return statements
+Pluralsight Course: *Design Patterns in Java: Behavioral - Iterator Pattern*. By Bryan Hansen.
 
-The Menu implementations are now encapsulated. The Waitress has no idea how the Menus hold their collection of menu items.
+Pluralsight Course: *Tactical Design Patterns in .NET: Control Flow - Iterator Pattern and Sequences*. By Zoran Horvat.
 
-All we need is a loop that polymorphically handles any collection of items as long as it implements Iterator.
-
-The Menu interfaces are now exactly the same and, uh oh, we still don’t have a common interface, which means the Waitress is still bound to two concrete Menu classes. We’d better fix that.
-
-It also places the task of traversal on the iterator object, not on the aggregate, which simplifies the aggregate interface and implementation, and places the responsibility where it should be.
+Udemy Course: *Design Patterns in C# and .NET - Iterator*. By Dmitri Nesteruk.
