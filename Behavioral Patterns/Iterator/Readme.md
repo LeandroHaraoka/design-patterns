@@ -6,11 +6,11 @@ An aggregate should provide a way for the client to access elements, without hav
 
 The Iterator Pattern states that the iteration rules should be concentrated in an Iterator object. The iterator implements an interface that allows the client to traverse the aggregate without knowing its structure.
 
-An Iterator should store data like the current state of the iteration and the logics for moving on to the next item. When a client decides to iterate through an aggregate, it uses the iterator to manage the traversal. When a new way to traverse is necessary, just create a new iterator.
+An Iterator should store data like the current state of the iteration and the logics for moving on to the next item. When a client decides to iterate through an aggregate, it uses the iterator to manage the traversal. When a new collection must be traversed, just create it with its new iterator.
 
 The below diagram shows the relationship between iterable collections and its iterators, with respective abstractions.
 
-TODO: Iterator Pattern Diagram. 
+![Iterator Pattern Diagram](Images/IteratorPatternDiagram.png)
 
 ## Problem
 
