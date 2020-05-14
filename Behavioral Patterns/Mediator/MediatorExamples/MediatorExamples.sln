@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatExample", "ChatExample\ChatExample.csproj", "{6F0DDB51-2164-4DBE-A967-BDE26FA3811E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatExample", "ChatExample\ChatExample.csproj", "{6F0DDB51-2164-4DBE-A967-BDE26FA3811E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquationExample", "EquationExample\EquationExample.csproj", "{40800A97-A603-4380-8F13-ADD88C185236}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatRExample", "MediatRExample\MediatRExample.csproj", "{CCD0FBE4-56A3-4978-A118-0A69A46A3EA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{6F0DDB51-2164-4DBE-A967-BDE26FA3811E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F0DDB51-2164-4DBE-A967-BDE26FA3811E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F0DDB51-2164-4DBE-A967-BDE26FA3811E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40800A97-A603-4380-8F13-ADD88C185236}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40800A97-A603-4380-8F13-ADD88C185236}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40800A97-A603-4380-8F13-ADD88C185236}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40800A97-A603-4380-8F13-ADD88C185236}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCD0FBE4-56A3-4978-A118-0A69A46A3EA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCD0FBE4-56A3-4978-A118-0A69A46A3EA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCD0FBE4-56A3-4978-A118-0A69A46A3EA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCD0FBE4-56A3-4978-A118-0A69A46A3EA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
