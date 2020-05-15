@@ -1,5 +1,5 @@
-﻿using MediatR;
-using MediatRExample.Variables;
+﻿using MediatRExample.Variables;
+using MediatRExample.Variables.Actuators;
 using MediatRExample.Variables.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,38 +11,33 @@ namespace MediatRExample
     [ApiController]
     public sealed class GasesController : ControllerBase
     {
-        private readonly IMediator _mediator;
+        private readonly PressureActuator _pressureActuator;
+        private readonly VolumeActuator _volumeActuator;
+        private readonly TemperatureActuator _temperatureActuator;
 
-        public GasesController(IMediator mediator)
+        public GasesController(PressureActuator pressureActuator, VolumeActuator volumeActuator, TemperatureActuator temperatureActuator)
         {
-            _mediator = mediator;
+            _pressureActuator = pressureActuator;
+            _volumeActuator = volumeActuator;
+            _temperatureActuator = temperatureActuator;
         }
 
         [HttpGet]
         public async Task<ActionResult> GetGases()
         {
             Console.WriteLine("Mediator");
-            Console.WriteLine("Equation Example");
+            Console.WriteLine("Gas Example");
 
             var gas = new Gas(100, 10, 30);
             PrintInfo(gas);
 
-            
-            await ExecuteProcess(ProcessType.Isobaric, Variable.Volume, 15);
-            await ExecuteProcess(ProcessType.Isobaric, Variable.Temperature, 90);
-            await ExecuteProcess(ProcessType.Isochoric, Variable.Pressure, 10);
-            await ExecuteProcess(ProcessType.Isothermal, Variable.Volume, 60);
-            await ExecuteProcess(ProcessType.Isochoric, Variable.Temperature, 45);
+            await _volumeActuator.UpdateValue(gas, ProcessType.Isobaric, 15);
+            await _temperatureActuator.UpdateValue(gas, ProcessType.Isobaric, 90);
+            await _pressureActuator.UpdateValue(gas, ProcessType.Isochoric, 10);
+            await _volumeActuator.UpdateValue(gas, ProcessType.Isothermal, 60);
+            await _temperatureActuator.UpdateValue(gas, ProcessType.Isochoric, 45);
 
             return Ok();
-
-            async Task ExecuteProcess(ProcessType type, Variable variable, double value)
-            {
-                Console.WriteLine($"\nExecuting a {type} process, changing the {variable} to {value}");
-                var process = new Process(gas, new ProcessConfiguration(type, variable), value);
-                await _mediator.Publish(process);
-                PrintInfo(gas);
-            }
         }
 
         private void PrintInfo(Gas gas)
@@ -51,9 +46,6 @@ namespace MediatRExample
             Console.WriteLine($"Pressure: {gas.CurrentState.Pressure}");
             Console.WriteLine($"Volume: {gas.CurrentState.Volume}");
             Console.WriteLine($"Temperature: {gas.CurrentState.Temperature}");
-
         }
     }
-
-
 }

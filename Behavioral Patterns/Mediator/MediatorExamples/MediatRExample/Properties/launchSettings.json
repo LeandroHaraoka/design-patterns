@@ -1,11 +1,10 @@
 ﻿{
-    "MediatRExample": {
-      "commandName": "Project",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "http://0.0.0.0:9000",
-      },
-      "applicationUrl": "http://localhost:51825/"
+  "MediatRExample": {
+    "commandName": "Project",
+    "applicationUrl": "https://localhost:5001",
+    "environmentVariables": {
+      "ASPNETCORE_ENVIRONMENT": "Development",
+      "ASPNETCORE_URLS": "http://0.0.0.0:5001"
     }
   }
 }
