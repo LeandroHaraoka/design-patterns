@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using StockExample.Brokers;
 using StockExample.Brokers.BrokerRepositories;
 using System.Reflection;
@@ -24,11 +26,18 @@ namespace StockExample
         {
             services
                 .AddControllers()
+                .AddNewtonsoftJson(CustomSerializerOptions.Options)
                 .ConfigureApiBehaviorOptions(CustomApiBehaviorOptions.Options);
+
+            services.AddDocumentation();
 
             services.AddSingleton<BlueBroker>();
             services.AddSingleton<GreenBroker>();
             services.AddSingleton<RedBroker>();
+
+            services.AddSingleton<BlueBrokerRepositoryWriter>();
+            services.AddSingleton<RedBrokerRepositoryWriter>();
+            services.AddSingleton<GreenBrokerRepositoryWriter>();
 
             services.AddSingleton<BlueBrokerRepository>();
             services.AddSingleton<GreenBrokerRepository>();
@@ -46,6 +55,7 @@ namespace StockExample
 
             builder.UseRouting();
 
+            builder.UseDocumentation();
             builder.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
@@ -64,6 +74,15 @@ namespace StockExample
             ActionContext context)
         {
             return new BadRequestObjectResult(context.ModelState);
+        }
+    }
+
+    public static class CustomSerializerOptions
+    {
+        public static void Options(MvcNewtonsoftJsonOptions options)
+        {
+            options.SerializerSettings.Converters.Add(new StringEnumConverter());
+            options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
         }
     }
 }

@@ -7,33 +7,21 @@ using System.Threading.Tasks;
 
 namespace StockExample.Brokers
 {
-    public abstract class Broker : INotificationHandler<StockQuotation>
+    public abstract class Broker : INotificationHandler<StockQuotationNotification>
     {
-        protected readonly Guid _id = Guid.NewGuid();
+        public readonly Guid _id;
         protected string _name;
         protected readonly IMediator _newYorkStockExchange;
         private readonly BrokerRepository _brokerRepository;
 
-        public Broker(IMediator mediator, BrokerRepository brokerRepository)
+        public Broker(IMediator mediator, BrokerRepository brokerRepository, Guid brokerId)
         {
             _newYorkStockExchange = mediator;
             _brokerRepository = brokerRepository;
+            _id = brokerId;
         }
 
-        public async Task GenerateCreateQuotation(
-            int sharesQuantity, StockIdentifier stockIdentifier, decimal price, QuotationType type)
-        {
-            var quotation = new StockQuotation(sharesQuantity, stockIdentifier, _name, price, _id, type);
-
-            Notifications.NotifyQuotation(quotation);
-
-            await _newYorkStockExchange.Publish(quotation);
-
-            if (!quotation._isExecuted)
-                _brokerRepository.Add(quotation);
-        }
-
-        public async Task Handle(StockQuotation arrivedQuotation, CancellationToken cancellationToken)
+        public async Task Handle(StockQuotationNotification arrivedQuotation, CancellationToken cancellationToken)
         {
             if (arrivedQuotation._ownerId == _id || arrivedQuotation._isExecuted)
                 return;
@@ -48,7 +36,5 @@ namespace StockExample.Brokers
 
             Notifications.NotifyTransaction(myQuotation, arrivedQuotation);
         }
-
-
     }
 }

@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatExample", "ChatExample\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatRExample", "MediatRExample\MediatRExample.csproj", "{CCD0FBE4-56A3-4978-A118-0A69A46A3EA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockExample", "StockExample\StockExample.csproj", "{481854BE-0986-4F3F-800D-3D30C6B4F6CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockExample", "StockExample\StockExample.csproj", "{481854BE-0986-4F3F-800D-3D30C6B4F6CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{087CA09E-6B54-4CB8-9A45-8B625BAE7301}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{481854BE-0986-4F3F-800D-3D30C6B4F6CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{481854BE-0986-4F3F-800D-3D30C6B4F6CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{481854BE-0986-4F3F-800D-3D30C6B4F6CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{087CA09E-6B54-4CB8-9A45-8B625BAE7301}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{087CA09E-6B54-4CB8-9A45-8B625BAE7301}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{087CA09E-6B54-4CB8-9A45-8B625BAE7301}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{087CA09E-6B54-4CB8-9A45-8B625BAE7301}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

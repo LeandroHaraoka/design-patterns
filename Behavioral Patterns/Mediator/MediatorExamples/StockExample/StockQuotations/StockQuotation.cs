@@ -34,4 +34,22 @@ namespace StockExample.StockQuotations
                 _type != quotation._type;
         }
     }
+
+    public class StockQuotationNotification : StockQuotation
+    {
+        public StockQuotationNotification(
+            int stockShares, StockIdentifier stockIdentifier, string ownerName, decimal price, Guid ownerId, QuotationType type) 
+            : base(stockShares, stockIdentifier, ownerName, price, ownerId, type)
+        {
+        }
+    }
+
+    public class StockQuotationDocument : StockQuotation
+    {
+        public StockQuotationDocument(StockQuotation quotation)
+            : base(quotation._stockShares, quotation._stockIdentifier, quotation._ownerName, 
+                  quotation._price, quotation._ownerId, quotation._type)
+        {
+        }
+    }
 }
