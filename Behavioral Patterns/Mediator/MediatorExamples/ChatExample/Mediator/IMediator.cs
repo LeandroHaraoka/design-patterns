@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ChatExample.Mediator
+﻿namespace ChatExample.Mediator
 {
     public interface IMediator<TColleague, TData>
     {
-        void Register(TColleague colleague);
-        void Send(TColleague from, TData colleague);
-        void Send<T>(TColleague from, TData colleague) where T : TColleague;
+        void Register(params TColleague[] colleagues);
+        void Send(TColleague from, TData message);
+        void Send<T>(TColleague from, TData message) where T : TColleague;
     }
 }

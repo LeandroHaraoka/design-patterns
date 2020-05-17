@@ -16,7 +16,6 @@ namespace StockExample
                 .ConfigureLogging(logging =>
                 {
                     logging.ClearProviders();
-                    //logging.AddConsole();
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

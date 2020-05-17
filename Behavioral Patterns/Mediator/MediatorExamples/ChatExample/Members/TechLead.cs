@@ -1,5 +1,4 @@
-﻿using ChatExample.Chats;
-using ChatExample.Mediator;
+﻿using ChatExample.Mediator;
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +11,7 @@ namespace ChatExample.Members
             Messages = new Dictionary<MessageType, string>
             {
                         { MessageType.Greetings, "Hello everyone!" },
-                        { MessageType.Tasks, "I'm still asking devops team to solve my ticket and in the meanwhile I'll help our devs." },
+                        { MessageType.Tasks, "I'm still asking devops team to solve my ticket and in the meanwhile I'll help you." },
                         { MessageType.Goodbyes, "See you later!" }
             };
             

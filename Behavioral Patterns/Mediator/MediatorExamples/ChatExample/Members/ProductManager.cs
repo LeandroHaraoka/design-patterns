@@ -1,5 +1,4 @@
-﻿using ChatExample.Chats;
-using ChatExample.Mediator;
+﻿using ChatExample.Mediator;
 using System;
 using System.Collections.Generic;
 

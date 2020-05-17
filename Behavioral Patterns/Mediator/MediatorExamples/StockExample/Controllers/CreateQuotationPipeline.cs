@@ -7,35 +7,28 @@ namespace StockExample.Controllers
 {
     public static class CreateQuotationPipeline
     {
-        public static StockQuotationNotification CreateQuotationNotification(IMediator _newYorkStockExchange,
-            CreateStockQuotationRequest request)
+        public static StockQuotationProposal CreateQuotationProposal(CreateStockQuotationRequest request)
         {
             var brokerName = BrokersConfiguration.Ids
                 .Where(x => x.Value == request.OwnerId)
                 .FirstOrDefault()
                 .Key;
 
-            return new StockQuotationNotification(request.StockShares,
+            return new StockQuotationProposal(request.StockShares,
                 request.StockIdentifier, brokerName, request.Price, request.OwnerId, request.type);
         }
-        public static StockQuotationNotification NotifyQuotation(this StockQuotationNotification quotationNotification)
+
+        public static StockQuotationProposal LogQuotationProposal(this StockQuotationProposal quotationProposal)
         {
-            Notifications.NotifyQuotation(quotationNotification);
-            return quotationNotification;
+            Notifications.LogQuotationProposal(quotationProposal);
+            return quotationProposal;
         }
 
-        public static StockQuotationNotification PublishQuotation(this StockQuotationNotification quotationNotification,
+        public static BaseStockQuotation PublishProposal(this StockQuotationProposal quotationProposal,
             IMediator _newYorkStockExchange)
         {
-            _newYorkStockExchange.Publish(quotationNotification).Wait();
-
-            if (!quotationNotification._isExecuted)
-            {
-                var quotationDocument = new StockQuotationDocument(quotationNotification);
-                _newYorkStockExchange.Publish(quotationDocument).Wait();
-            }
-
-            return quotationNotification;
+            _newYorkStockExchange.Publish(quotationProposal).Wait();
+            return quotationProposal;
         }
     }
 }

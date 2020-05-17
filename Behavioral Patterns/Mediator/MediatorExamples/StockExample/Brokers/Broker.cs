@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StockExample.Brokers
 {
-    public abstract class Broker : INotificationHandler<StockQuotationNotification>
+    public abstract class Broker : INotificationHandler<StockQuotationProposal>, INotificationHandler<StockQuotation>
     {
         public readonly Guid _id;
         protected string _name;
@@ -21,20 +21,35 @@ namespace StockExample.Brokers
             _id = brokerId;
         }
 
-        public async Task Handle(StockQuotationNotification arrivedQuotation, CancellationToken cancellationToken)
+        // Approve proposal (check risk, bank balance, etc)
+        public async Task Handle(StockQuotationProposal arrivedProposal, CancellationToken cancellationToken)
+        {
+            if (arrivedProposal._ownerId != _id)
+                return;
+
+            // Instructions to approve proposal
+
+            var stockQuotation = new StockQuotation(arrivedProposal);
+            _newYorkStockExchange.Publish(stockQuotation).Wait();
+
+            if (!stockQuotation._isExecuted)
+                _brokerRepository.Add(stockQuotation);
+        }
+
+        public async Task Handle(StockQuotation arrivedQuotation, CancellationToken cancellationToken)
         {
             if (arrivedQuotation._ownerId == _id || arrivedQuotation._isExecuted)
                 return;
 
-            var myQuotation = _brokerRepository.Find(arrivedQuotation);
+            var myOffer = _brokerRepository.FindOffer(arrivedQuotation);
 
-            if (myQuotation is null)
+            if (myOffer is null)
                 return;
 
             arrivedQuotation._isExecuted = true;
-            _brokerRepository.Remove(myQuotation);
-
-            Notifications.NotifyTransaction(myQuotation, arrivedQuotation);
+            Notifications.NotifyTransaction(myOffer, arrivedQuotation);
+            
+            _brokerRepository.Remove(myOffer);
         }
     }
 }

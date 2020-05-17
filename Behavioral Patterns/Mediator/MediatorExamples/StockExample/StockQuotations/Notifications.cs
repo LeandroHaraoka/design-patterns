@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StockExample.StockQuotations
 {
     public static class Notifications
     {
-        public static void NotifyQuotation(StockQuotation quotation)
+        public static void LogQuotationProposal(BaseStockQuotation quotation)
         {
             PrintDetailInYellow($"\n[{DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")}] Quotation published", string.Empty);
             PrintDetailInYellow("Owner", quotation._ownerName);
@@ -17,7 +14,7 @@ namespace StockExample.StockQuotations
             PrintDetailInYellow("Price", quotation._price);
         }
 
-        public static void NotifyTransaction(StockQuotation myQuotation, StockQuotation arrivedQuotation)
+        public static void NotifyTransaction(BaseStockQuotation myQuotation, BaseStockQuotation arrivedQuotation)
         {
             var (seller, buyer) = myQuotation._type == QuotationType.Ask
                 ? (myQuotation._ownerName, arrivedQuotation._ownerName)

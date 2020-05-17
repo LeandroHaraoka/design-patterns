@@ -8,18 +8,18 @@ namespace StockExample.Brokers.BrokerRepositories
 {
     public abstract class BrokerRepository
     {
-        protected readonly IList<StockQuotation> _quotations = new List<StockQuotation>();
+        protected readonly IList<BaseStockQuotation> _quotations = new List<BaseStockQuotation>();
 
-        public void Add(StockQuotation quotation) => _quotations.Add(quotation);
+        public void Add(BaseStockQuotation quotation) => _quotations.Add(quotation);
         
-        public StockQuotation Find(StockQuotation quotation)
+        public BaseStockQuotation FindOffer(BaseStockQuotation quotation)
         {
             return _quotations
                 .Where(q => q.CanGenerateTransaction(quotation))
                 .FirstOrDefault();
         }
 
-        public bool Remove(StockQuotation quotation) => _quotations.Remove(quotation);
+        public bool Remove(BaseStockQuotation quotation) => _quotations.Remove(quotation);
     }
 
     public class BlueBrokerRepository : BrokerRepository

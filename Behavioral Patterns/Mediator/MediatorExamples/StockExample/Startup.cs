@@ -35,9 +35,9 @@ namespace StockExample
             services.AddSingleton<GreenBroker>();
             services.AddSingleton<RedBroker>();
 
-            services.AddSingleton<BlueBrokerRepositoryWriter>();
-            services.AddSingleton<RedBrokerRepositoryWriter>();
-            services.AddSingleton<GreenBrokerRepositoryWriter>();
+            //services.AddSingleton<BlueBrokerRepositoryWriter>();
+            //services.AddSingleton<RedBrokerRepositoryWriter>();
+            //services.AddSingleton<GreenBrokerRepositoryWriter>();
 
             services.AddSingleton<BlueBrokerRepository>();
             services.AddSingleton<GreenBrokerRepository>();

@@ -1,5 +1,4 @@
-﻿using ChatExample.Chats;
-using ChatExample.Mediator;
+﻿using ChatExample.Mediator;
 using ChatExample.Members;
 using System;
 
@@ -26,8 +25,6 @@ namespace ChatExample
             productManager.Send<TechLead>(MessageType.Tasks);
 
             developer.Send(MessageType.Goodbyes);
-
-
         }
     }
 }

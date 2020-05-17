@@ -22,20 +22,24 @@ namespace StockExample.Controllers
         }
 
         /// <summary>
-        /// Creates a member.
+        /// Publishes a stock quotation.
         /// </summary>
         /// <param name="request">Member creation request.</param>
         /// <response code="200">Successful response.</response>
         [HttpPost]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
-        public async Task<ActionResult<StockQuotationNotification>> PublishStockQuotation(
+        public async Task<ActionResult<StockQuotationProposal>> PublishStockQuotation(
             [FromBody] CreateStockQuotationRequest request)
         {
+            Console.WriteLine("-------------------------------------------");
+            
             var notifiedQuotation = CreateQuotationPipeline
-                .CreateQuotationNotification(_newYorkStockExchange, request)
-                .NotifyQuotation()
-                .PublishQuotation(_newYorkStockExchange);
-
+                .CreateQuotationProposal(request)
+                .LogQuotationProposal()
+                .PublishProposal(_newYorkStockExchange);
+            
+            Console.WriteLine("\n-------------------------------------------");
+            
             return Ok(notifiedQuotation);
         }
     }
