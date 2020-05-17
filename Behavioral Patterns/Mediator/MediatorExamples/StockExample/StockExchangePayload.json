@@ -1,0 +1,44 @@
+[
+    {
+        "ownerId": "082ca906-6edb-4f22-a720-5c456bcedc64",
+        "stockIdentifier": "FB",
+        "type": "Ask",
+        "stockShares": 300,
+        "price": 10
+    },
+    {
+        "ownerId": "1d9bf2ca-2a9d-486f-a83f-63d6c828c083",
+        "stockIdentifier": "GOOG",
+        "type": "Ask",
+        "stockShares": 150,
+        "price": 20
+    },  
+    {
+        "ownerId": "1612356b-9f34-478b-a2b6-61752434bab4",
+        "stockIdentifier": "MSFT34",
+        "type": "Ask",
+        "stockShares": 100,
+        "price": 50
+    },  
+    {
+        "ownerId": "1d9bf2ca-2a9d-486f-a83f-63d6c828c083",
+        "stockIdentifier": "FB",
+        "type": "Bid",
+        "stockShares": 300,
+        "price": 10
+    },
+    {
+        "ownerId": "082ca906-6edb-4f22-a720-5c456bcedc64",
+        "stockIdentifier": "MSFT34",
+        "type": "Bid",
+        "stockShares": 100,
+        "price": 50
+    },
+    {
+        "ownerId": "1612356b-9f34-478b-a2b6-61752434bab4",
+        "stockIdentifier": "GOOG",
+        "type": "Bid",
+        "stockShares": 150,
+        "price": 20
+    }
+]

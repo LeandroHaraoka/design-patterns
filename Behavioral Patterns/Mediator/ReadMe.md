@@ -214,7 +214,7 @@ MediatR library is a simple mediator implementation in .NET. It allows messaging
 
 As defined by MediatR documentation, it "*supports request/response, commands, queries, notifications and events, synchronous and async with intelligent dispatching via C# generic variance*".
 
-This example is a simplification of a Stock Exchange, which permits create stock quotations and executing trades.
+In this section we'll see an example that is a simplification of a Stock Exchange, which permits create stock quotations and executing trades.
 
 The life cycle of a stock quotation is defined as below.
 
