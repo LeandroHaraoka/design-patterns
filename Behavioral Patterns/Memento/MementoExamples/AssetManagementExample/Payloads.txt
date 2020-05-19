@@ -1,0 +1,23 @@
+﻿Contract
+{
+  "indexRate": 1.5,
+  "startDate": "2020-01-01",
+  "settlementDate": "2020-01-30"
+}
+
+Movements
+{
+  "amount": 1000,
+  "tradeDate": "2020-01-15",
+}
+
+{
+  "amount": -500,
+  "tradeDate": "2020-01-20",
+}
+
+Retroactive Movement
+{
+  "amount": -500,
+  "tradeDate": "2020-01-25",
+}

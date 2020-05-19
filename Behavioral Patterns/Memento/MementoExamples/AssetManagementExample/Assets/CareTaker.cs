@@ -14,9 +14,13 @@ namespace AssetManagementExample.Assets
             _mementoRepository = mementoRepository;
         }
 
-        public void Save()
+        public AssetState GetAssetCurrentState() => _asset._state;
+
+        public AssetState ChangeAssetState(AssetState newState)
         {
+            _asset._state = newState;
             _mementoRepository.Add(_asset.Save());
+            return newState;
         }
 
         public void Restore(DateTime date)

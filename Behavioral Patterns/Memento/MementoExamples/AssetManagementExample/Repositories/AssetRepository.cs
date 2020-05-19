@@ -7,16 +7,16 @@ namespace AssetManagementExample.Repositories
 {
     public interface IMementoRepository
     {
-        void Add(IMemento memento);
+        void Add(IAssetMemento memento);
         void RemoveSince(DateTime date);
-        IMemento FindLast();
+        IAssetMemento FindLast();
     }
 
     public class AssetRepository: IMementoRepository
     {
-        private readonly Dictionary<DateTime, IMemento> _mementos = new Dictionary<DateTime, IMemento>();
+        private readonly Dictionary<DateTime, IAssetMemento> _mementos = new Dictionary<DateTime, IAssetMemento>();
 
-        public void Add(IMemento memento) => _mementos[memento.GetDate()] = memento;
+        public void Add(IAssetMemento memento) => _mementos[memento.GetDate()] = memento;
 
         public void RemoveSince(DateTime date)
         {
@@ -28,6 +28,6 @@ namespace AssetManagementExample.Repositories
             }
         }
 
-        public IMemento FindLast() => _mementos.OrderBy(x => x.Key).LastOrDefault().Value;
+        public IAssetMemento FindLast() => _mementos.OrderBy(x => x.Key).LastOrDefault().Value;
     }
 }

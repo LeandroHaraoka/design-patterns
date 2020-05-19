@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AssetManagementExample.Movements
+namespace Assets
 {
     public class Movement
     {

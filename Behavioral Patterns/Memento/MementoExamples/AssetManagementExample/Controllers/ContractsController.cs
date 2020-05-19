@@ -1,6 +1,4 @@
 ﻿using AssetManagementExample.Assets;
-using AssetManagementExample.Movements;
-using AssetManagementExample.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -9,11 +7,11 @@ namespace AssetManagementExample.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ContractController : ControllerBase
+    public class ContractsController : ControllerBase
     {
         private readonly Asset _asset;
 
-        public ContractController(Asset asset)
+        public ContractsController(Asset asset)
         {
             _asset = asset;
         }
@@ -25,8 +23,8 @@ namespace AssetManagementExample.Controllers
         /// <response code="200">Successful response.</response>
         [HttpPost]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
-        public async Task<ActionResult<Contract>> Create(
-            [FromBody] Contract contract)
+        public async Task<ActionResult<Asset>> Create(
+            [FromBody] AssetContract contract)
         {
             if (_asset._contract != null)
                 return UnprocessableEntity();

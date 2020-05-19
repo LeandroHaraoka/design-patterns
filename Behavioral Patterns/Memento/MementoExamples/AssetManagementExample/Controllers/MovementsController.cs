@@ -1,5 +1,5 @@
 ﻿using AssetManagementExample.Assets;
-using AssetManagementExample.Movements;
+using Assets;
 using AssetManagementExample.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +15,7 @@ namespace AssetManagementExample.Controllers
         private readonly Asset _asset;
         private readonly CareTaker _careTaker;
 
-        // It's just an example, the repository should not be injected at application layer.
+        // It's just an example, these injections should not be at application layer.
         public MovementsController(IRepository<Movement> movementRepository, Asset asset, CareTaker careTaker)
         {
             _movementRepository = movementRepository;
@@ -24,7 +24,7 @@ namespace AssetManagementExample.Controllers
         }
 
         /// <summary>
-        /// Create a movement.
+        /// Creates a movement.
         /// </summary>
         /// <param name="request">Movement creation request.</param>
         /// <response code="200">Successful response.</response>

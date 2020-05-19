@@ -29,7 +29,7 @@ namespace BankAccountTransactionsExample.BankAccounts
                 _isExecuted = true;
             }
 
-            if (_isExecuted == true)
+            if (_isExecuted)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"Processed Transaction: {_transaction} $ {_volume} ({_identifier})");

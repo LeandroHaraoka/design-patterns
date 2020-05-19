@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetManagementExample", "AssetManagementExample\AssetManagementExample.csproj", "{22C4F2F3-6854-4CEC-9E4C-2C691FAD61CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssetManagementExample", "AssetManagementExample\AssetManagementExample.csproj", "{22C4F2F3-6854-4CEC-9E4C-2C691FAD61CB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MementoAndCommandExample", "MementoAndCommandExample\MementoAndCommandExample.csproj", "{E01D6E36-F915-4C3B-B49E-50D3EA1AB9BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MementoExample", "MementoExample\MementoExample.csproj", "{2FDAC49F-1E38-438F-8FA4-4B9940DC1D54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{22C4F2F3-6854-4CEC-9E4C-2C691FAD61CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22C4F2F3-6854-4CEC-9E4C-2C691FAD61CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22C4F2F3-6854-4CEC-9E4C-2C691FAD61CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E01D6E36-F915-4C3B-B49E-50D3EA1AB9BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E01D6E36-F915-4C3B-B49E-50D3EA1AB9BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E01D6E36-F915-4C3B-B49E-50D3EA1AB9BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E01D6E36-F915-4C3B-B49E-50D3EA1AB9BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FDAC49F-1E38-438F-8FA4-4B9940DC1D54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FDAC49F-1E38-438F-8FA4-4B9940DC1D54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FDAC49F-1E38-438F-8FA4-4B9940DC1D54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FDAC49F-1E38-438F-8FA4-4B9940DC1D54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
 using AssetManagementExample.Accruals;
 using AssetManagementExample.Assets;
-using AssetManagementExample.Movements;
+using Assets;
 using AssetManagementExample.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,7 +31,7 @@ namespace AssetManagementExample
 
             services.AddSingleton<IRepository<Movement>, MovementRepository>();
             services.AddSingleton<IMementoRepository, AssetRepository>();
-            services.AddSingleton<Accrual>();
+            services.AddSingleton<IAssetManager, AssetManager>();
             services.AddSingleton<Asset>();
             services.AddSingleton<CareTaker>();
 

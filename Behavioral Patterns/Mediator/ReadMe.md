@@ -16,6 +16,8 @@ In this example, consider the team contains a developer, a tech lead and a produ
 
 ![Mediator Chat Example](Images/MediatorChat.png)
 
+# Show me the Code
+
 The corporate chat will be an implementation of the following Mediator interface. It allows members to be registered and send messages to all chat members or to receivers of type T.
 
 ```csharp
