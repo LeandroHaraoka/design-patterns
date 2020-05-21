@@ -12,12 +12,15 @@ namespace Memento.Mementos
         public Caretaker(Originator originator)
         {
             _originator = originator;
-            Backup();
         }
 
-        public void Backup() => _mementos.Add(_originator.Save());
+        public void Backup()
+        {
+            _mementos.Add(_originator.Save());
+            CustomConsole.WriteLine(ConsoleColor.Yellow, "Saving the current result to calculator history.\n");
+        }
 
-        public void Undo()
+        public void RestorePreviousState()
         {
             if (_mementos.Count == 0)
                 return;

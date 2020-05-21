@@ -7,7 +7,7 @@ namespace StateExamples.States
 {
     public class WorkInProgress : State
     {
-        public WorkInProgress(Activity activity) : base(activity, 3000)
+        public WorkInProgress(Activity activity) : base(activity, 1000)
         {
         }
 

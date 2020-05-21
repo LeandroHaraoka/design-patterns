@@ -8,8 +8,7 @@ namespace Memento.Mementos
 
         public Originator(double @base)
         {
-            Console.WriteLine($"\nInitial state: {@base}\n");
-
+            Console.WriteLine($"\nInitial value: {@base}\n");
             _state = @base;
         }
 
@@ -48,7 +47,7 @@ namespace Memento.Mementos
         private void PrintStateChange(string action, double? operand)
         {
             Console.WriteLine($"Originator Action: {action} {operand}");
-            Console.WriteLine($"State: {_state}\n");
+            Console.WriteLine($"Result: {_state}");
 
         }
     }

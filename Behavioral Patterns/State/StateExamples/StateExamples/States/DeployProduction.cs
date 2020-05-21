@@ -7,7 +7,7 @@ namespace StateExamples.States
 {
     public class DeployProduction : State
     {
-        public DeployProduction(Activity activity) : base(activity, 3000)
+        public DeployProduction(Activity activity) : base(activity, 1000)
         {
         }
 

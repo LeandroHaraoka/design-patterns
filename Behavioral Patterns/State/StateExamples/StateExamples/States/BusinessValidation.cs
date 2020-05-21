@@ -7,7 +7,7 @@ namespace StateExamples.States
 {
     public class BusinessValidation : State
     {
-        public BusinessValidation(Activity activity) : base(activity, 3000)
+        public BusinessValidation(Activity activity) : base(activity, 1000)
         {
         }
 
@@ -28,6 +28,5 @@ namespace StateExamples.States
 
             _activity.ChangeState(new DeployProduction(_activity));
         }
-
     }
 }

@@ -9,7 +9,7 @@ namespace Memento.Mementos
         double GetState();
     }
 
-    class ConcreteMemento : IMemento
+    public class ConcreteMemento : IMemento
     {
         private double _state;
 

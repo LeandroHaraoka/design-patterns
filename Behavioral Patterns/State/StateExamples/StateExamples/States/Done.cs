@@ -9,7 +9,6 @@ namespace StateExamples.States
     {
         public Done(Activity activity) : base(activity, 0)
         {
-            _timer.Dispose();
             Console.WriteLine($"[{_activity._name}] Finally delivered.");
         }
 
@@ -21,6 +20,5 @@ namespace StateExamples.States
         public override void Execute(bool withErrors = false)
         {
         }
-
     }
 }

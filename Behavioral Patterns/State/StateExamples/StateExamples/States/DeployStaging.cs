@@ -7,7 +7,7 @@ namespace StateExamples.States
 {
     public class DeployStaging : State
     {
-        public DeployStaging(Activity activity) : base(activity, 3000)
+        public DeployStaging(Activity activity) : base(activity, 1000)
         {
         }
 

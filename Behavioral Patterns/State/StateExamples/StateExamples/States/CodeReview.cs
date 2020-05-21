@@ -7,7 +7,7 @@ namespace StateExamples.States
 {
     public class CodeReview : State
     {
-        public CodeReview(Activity activity) : base(activity, 3000)
+        public CodeReview(Activity activity) : base(activity, 1000)
         {
         }
 
@@ -27,7 +27,6 @@ namespace StateExamples.States
             }
 
             _activity.ChangeState(new DeployStaging(_activity));
-
         }
     }
 }

@@ -19,7 +19,10 @@ namespace StateExamples.States
         private void ConfigureAlertTimer(double alertInterval)
         {
             if (alertInterval <= 0)
+            {
+                _timer = default;
                 return;
+            }
 
             _timer = new Timer(alertInterval)
             {
@@ -29,7 +32,7 @@ namespace StateExamples.States
             _timer.Elapsed += OnTimedEvent;
         }
 
-        public void InitializeAlertTimer() => _timer.Start();
+        public void InitializeAlertTimer() => _timer?.Start();
 
         public abstract void Execute(bool withErrors = false);
     }

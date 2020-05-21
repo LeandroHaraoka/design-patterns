@@ -7,7 +7,7 @@ namespace StateExamples.States
 {
     public class Revision : State
     {
-        public Revision(Activity activity) : base(activity, 3000)
+        public Revision(Activity activity) : base(activity, 1000)
         {
         }
 

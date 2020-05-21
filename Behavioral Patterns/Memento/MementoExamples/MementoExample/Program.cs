@@ -29,7 +29,7 @@ namespace Memento
             originator.DivideBy(20);
             caretaker.Backup();
 
-            for (int i = 0; i <= 10; i++) caretaker.Undo();
+            for (int i = 0; i <= 10; i++) caretaker.RestorePreviousState();
         }
     }
 }
