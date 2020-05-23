@@ -13,9 +13,8 @@ namespace AssetExample.Wallets
         {
             asset.Id = Guid.NewGuid();
             _forexAssets.Add(asset);
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("\n[Forex Wallet] New Asset was added. Please check the details.");
-            Console.ForegroundColor = ConsoleColor.White;
+
+            CustomConsole.WriteLine("\n[Forex Wallet] New Asset was added. Please check the details.", ConsoleColor.Magenta);
             asset.PrintDetails();
         }
     }

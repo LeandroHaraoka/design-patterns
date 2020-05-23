@@ -6,7 +6,7 @@ The state pattern is useful when an object frequently changes its state and, con
 
 The State Pattern can be implemented considering these players:
 
-- The context object has a refence via interface to the state in which it is. It also contains a method to change its state.
+- The context object has a refence to the state in which it is. It also contains a method to change its state.
 - The State interface defines all methods that has different behavior for each state.
 - The concrete states have a reference to the related context and implements the interface methods.
 

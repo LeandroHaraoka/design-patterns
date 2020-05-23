@@ -1,0 +1,82 @@
+﻿[
+  {
+    "assetType": "Cash",
+    "buyer": "83fdb920-5316-4b74-b3d3-927def5e0be2",
+    "seller": "63be2bdb-a101-4ca4-9fd1-ca46de6f8f29",
+    "tradeDate": "2020-05-30T15:54:55.894Z",
+    "movements": [
+      {
+        "withdrawDate": "2020-12-21T15:54:55.894Z",
+        "price": 1500,
+        "volume": 1,
+        "direction": "Inflow"
+      }
+    ]
+  },
+  {
+    "assetType": "Bond",
+    "buyer": "83fdb920-5316-4b74-b3d3-927def5e0be2",
+    "seller": "63be2bdb-a101-4ca4-9fd1-ca46de6f8f29",
+    "tradeDate": "2020-05-30T15:54:55.894Z",
+    "movements": [
+      {
+        "withdrawDate": "2020-09-17",
+        "price": 100,
+        "volume": 1,
+        "direction": "Inflow",
+      },
+      {
+        "withdrawDate": "2020-09-17",
+        "price": 100,
+        "volume": 1,
+        "direction": "Outflow",
+        "index": "PRE",
+        "rate": 0.3
+      }
+    ]
+  },
+  {
+    "assetType": "Forex",
+    "buyer": "83fdb920-5316-4b74-b3d3-927def5e0be2",
+    "seller": "63be2bdb-a101-4ca4-9fd1-ca46de6f8f29",
+    "tradeDate": "2020-05-30T15:54:55.894Z",
+    "movements": [
+      {
+        "withdrawDate": "2020-09-17",
+        "price": 6.50,
+        "volume": 1,
+        "direction": "Inflow",
+        "referenceCurrency": "USD",
+        "currency": "BRL"
+      }
+    ]
+  },
+  {
+    "assetType": "Stock",
+    "buyer": "83fdb920-5316-4b74-b3d3-927def5e0be2",
+    "seller": "63be2bdb-a101-4ca4-9fd1-ca46de6f8f29",
+    "tradeDate": "2020-05-30T15:54:55.894Z",
+    "movements": [
+      {
+        "withdrawDate": "2020-09-17",
+        "price": 6.50,
+        "volume": 1,
+        "stockCode": "FB"
+      }
+    ]
+  },
+  {
+    "assetType": "Commodity",
+    "buyer": "83fdb920-5316-4b74-b3d3-927def5e0be2",
+    "seller": "63be2bdb-a101-4ca4-9fd1-ca46de6f8f29",
+    "tradeDate": "2020-05-30T15:54:55.894Z",
+    "movements": [
+      {
+        "withdrawDate": "2020-09-17",
+        "price": 1750,
+        "volume": 1,
+        "commodityIdentifier": "GOLD"
+      }
+    ]
+  }
+]

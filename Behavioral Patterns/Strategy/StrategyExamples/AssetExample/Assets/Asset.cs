@@ -32,8 +32,7 @@ namespace AssetExamples.Assets
         {
             Console.WriteLine($"\nId: {Id}");
             Console.WriteLine($"Trade Date: {_tradeDate}");
-            Console.Write("Asset Type: ");
-            Console.WriteLine($"{_assetType}");
+            Console.WriteLine($"Asset Type: {_assetType}");
             Console.WriteLine($"Buyer Id: {_buyer}");
             Console.WriteLine($"Seller Id: {_seller}");
 
