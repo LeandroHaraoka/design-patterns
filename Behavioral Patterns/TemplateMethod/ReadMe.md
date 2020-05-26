@@ -2,9 +2,9 @@
 
 Define the skeleton of an algorithm in an operation, deferring some steps to subclasses. Template Method lets subclasses redefine certain steps of an algorithm without changing the algorithm's structure.
 
-Template Method pattern suggests that you segregate an algorithm in some steps that can be overriden. Each step can have a default implementation or be defined as abstract requiring a specific implementation. The Template Method will not be overriden, it'll consist of the instructions to invoke each step, that are shared by different classes. 
+It suggests that you segregate an algorithm in some steps that can be overriden. Each step can have a default implementation or be defined as abstract requiring a specific implementation. This pattern will not be overriden, it'll consist of the instructions to invoke each step, that are shared by different classes. 
 
-So, the Template Method pattern can be implementated as following.
+So, it can be implementated as following.
 
 ![Template Method Pattern Diagram](Images/TemplateMethodPatternDiagram.png)
 
@@ -16,9 +16,9 @@ In this article, we'll see an example which goal is to solve the following probl
 - Map them and send an e-mail/file to the Accounting team, in order to reconcile the forex operations.
 - Register each operation in a Tradebook that is a source for the company analysis and keeps the forex operations history.
 
-There is a relevant point here: the analyst must deal with two types of FX operations: FX forward contracts and FX vanilla options. It's not the intention of this article to explain both of them, but have in mind that they're received in different spreadsheets, consist of different information and each one have its specific Tradebook. Although the steps for both kind of operations are similar, the execution is different. 
+There is a relevant point here: the analyst must deal with two types of FX operations: FX forward contracts and FX vanilla options. It's not the intention of this article to explain both of them, but bare in mind that they're received in different spreadsheets, consist of different information and each one have its specific Tradebook. Although the steps for both kind of operations are similar, the execution is different. 
 
-So, it's look like a Template Method should invoke these steps. For each step we'll be able to execute a default or a particular implementation.
+So, it looks like a template method should invoke these steps. For each step we'll be able to execute a default or a particular implementation.
 
 ![Forex Tradebook Example](Images/ForexTradebookExample.png)
 
@@ -105,7 +105,7 @@ public class FxVanillaOption : FxOperation
 }
 ```
 
-To execute the analyst job steps we'll use a ForexHandler. The following class has a default implementation for reconciling operations which instructions are the same for both forward and options operations. The ReadReport and AddOperationsToTradebook abstract methods do not require a default implementation, as each kind of operation has its particularity. Now, the key point of the Template Method pattern: a template method is defined as successive invokations of each step, which methods will be overriden by the concrete handlers.
+To execute the analyst job steps we'll use a ForexHandler. The following class has a default implementation for reconciling operations which instructions are the same for both forward and options operations. The ReadReport and AddOperationsToTradebook abstract methods do not require a default implementation, as each kind of operation has its particularity. Now, the key point of the pattern: a template method is defined as successive invokations of each step, which methods will be overriden by the concrete handlers.
 
 ```csharp
 public abstract class ForexHandler
@@ -168,7 +168,7 @@ public class VanillaOptionHandler : ForexHandler
 }
 ```
 
-So, when the client invokes the Template Method, the specif steps will be executed as defined by the concrete handler and the common step will be executed as defined by the abstraction.
+So, when the client invokes the template Method, the specific steps will be executed as defined by the concrete handler and the common step will be executed as defined by the abstraction.
 
 Let's execute it for reading a forward contract report.
 
@@ -200,6 +200,8 @@ Output:
 
 ![Vanilla Option Output](Images/VanillaOptionOutput.png)
 
+The implementation details to read reports and insert operations to tradebook were not presented in this article because they're not relevant to the pattern understanding.
+
 ## Use cases
 
 Use Template Method Pattern when:
@@ -212,7 +214,7 @@ Use Template Method Pattern when:
 - Reduces code duplication.
 - Creates an abstraction for the client to handle the template method object.
 - Segregates an algorithm in well defined steps. 
-- The client is unaware about the steps design and implementation, it knows only the Template Method.
+- The client is unaware about the steps design and implementation, it only knows the template Method.
 
 ## Disadvantages
 

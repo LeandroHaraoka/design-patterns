@@ -14,8 +14,9 @@ namespace BankReportsExample.Handlers
         }
 
         protected abstract List<FxOperation> ReadReport();
+        protected abstract void AddOperationsToTradebook(List<FxOperation> fxOperations);
 
-        public List<FxOperation> ReconcileFxOperations(List<FxOperation> fxOperations)
+        private List<FxOperation> ReconcileFxOperations(List<FxOperation> fxOperations)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"\n[Accounting] Reconciled {fxOperations.Count} FX Operations.");
@@ -24,7 +25,5 @@ namespace BankReportsExample.Handlers
             fxOperations.ForEach(o => o.SetId(Guid.NewGuid()));
             return fxOperations;
         }
-
-        protected abstract void AddOperationsToTradebook(List<FxOperation> fxOperations);
     }
 }
