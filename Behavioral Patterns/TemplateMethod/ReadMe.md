@@ -16,7 +16,7 @@ In this article, we'll see an example which goal is to solve the following probl
 - Map them and send an e-mail/file to the Accounting team, in order to reconcile the forex operations.
 - Register each operation in a Tradebook that is a source for the company analysis and keeps the forex operations history.
 
-There is a relevant point here: the analyst must deal with two types of FX operations: FX forward contracts and FX vanilla options. It's not the intention of this article to explain both of them, but bare in mind that they're received in different spreadsheets, consist of different information and each one have its specific Tradebook. Although the steps for both kind of operations are similar, the execution is different. 
+There is a relevant point here: the analyst must deal with two types of FX operations: FX forward contracts and FX vanilla options. It's not the intention of this article to explain both of them, but have in mind that they're received in different spreadsheets, consist of different information and each one have its specific Tradebook. Although the steps for both kind of operations are similar, the execution is different. 
 
 So, it looks like a template method should invoke these steps. For each step we'll be able to execute a default or a particular implementation.
 
