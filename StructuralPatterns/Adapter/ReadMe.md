@@ -106,7 +106,7 @@ public void EmitAlert(string error, string applicationName)
 
 The LoggerAdapter class is the key point of the pattern. Notice that it implements the ILogger interface, so ClientService can consume it.
 
-The adapter solves the problem that is emitting an alert without stopping to log, that's why it contains a reference both to CommandCenterLogger and to the adaptee LogLibrary.
+The adapter solves the problem that is emitting an alert without stopping to log, that's why it contains a reference both to CommandCenterLogger and to the adaptee LogLibrary. Notice that the adapter is defining how the log error should be executed. Maybe it's a better idea to use another pattern for this (like Facade) and makes LoggerAdapter responsible just for adapting the CommandCenterLogger.
 
 ```csharp
 public class LoggerAdapter : ILogger
@@ -234,7 +234,8 @@ public void Should_execute_calculus()
 Use Adapter Pattern when:
 
 - You want to consume an existing class/service and its interface is not compatible with the one you need.
-- You want to create a reusable class that does not depends on the interface signatures.
+- You want to create a reusable class that does not depend on the interface signatures.
+- You want to mock a class which does not allows this feature.
 - If you need to add functionallity to the adapter, may be it's not the appropriate pattern to solve your problem.
 
 ## Advantages
@@ -245,7 +246,7 @@ Use Adapter Pattern when:
 
 ## Disadvantages
 
-- 
+- Increase code complexity, so it should be used only when you cannot modify the adaptee.
 
 ## Comparisons
 
@@ -255,12 +256,10 @@ https://refactoring.guru/design-patterns/adapter
 
 Pluralsight Course: *C# Design Patterns: Adapter*. By Steve Smith.    
     
-Pluralsight Course: *Design Patterns in Java: Behavioral - Visitor Pattern*. By Bryan Hansen.
+Pluralsight Course: *Design Patterns in Java: Structural - Adapter Pattern*. By Bryan Hansen.
 
-Pluralsight Course: *Tactical Design Patterns in .NET: Managing Responsibilities - Visitor Design Pattern and Encapsulation*. By Zoran Horvat.
-
-Udemy Course: *Design Patterns in C# and .NET - Visitor*. By Dmitri Nesteruk.
+Udemy Course: *Design Patterns in C# and .NET - Adapter*. By Dmitri Nesteruk.
 
 ## Todo
 
-Refatoring Guru comparisons
+Comparisons

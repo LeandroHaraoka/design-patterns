@@ -11,6 +11,7 @@ namespace LegacyCodeExample.Tests
         [Fact]
         public void Should_execute_calculus()
         {
+            // Arrange
             var complexFinancialCalculusMock = new Mock<IComplexFinancialCalculus>();
 
             complexFinancialCalculusMock
@@ -19,9 +20,11 @@ namespace LegacyCodeExample.Tests
                 .Returns(1m);
 
             var service = new ClientService(complexFinancialCalculusMock.Object);
-
+            
+            // Act
             service.Execute();
 
+            // Assert
             complexFinancialCalculusMock
                 .Verify(x => x.Calculate(
                     It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime>(), It.IsAny<DateTime>()), Times.Once);
