@@ -186,7 +186,6 @@ Use Bridge Pattern when:
 - Change a variant does not affect any other variant from any dimension.
 - You want to share an implementation among multiple abstractions.
 
-
 ## Advantages
 
 - New variants can be added without having to modify the existing classes.
