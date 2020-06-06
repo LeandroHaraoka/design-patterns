@@ -7,21 +7,18 @@ namespace LoggerAdapterExample
 {
     public class LoggerAdapter : ILogger
     {
-        private readonly CommandCenterLogger _commandCenterLogger;
-        private readonly LogLibrary _logLibrary;
+        private readonly CustomLogger _customLogger;
+        private readonly string _applicationName = Assembly.GetExecutingAssembly().GetName().Name;
 
-        public LoggerAdapter(LogLibrary logLibrary, CommandCenterLogger commandCenterLogger)
+        public LoggerAdapter(CustomLogger commandCenterLogger)
         {
-            _commandCenterLogger = commandCenterLogger;
-            _logLibrary = logLibrary;
+            _customLogger = commandCenterLogger;
         }
 
-        public void LogError(Exception exception)
-        {
-            _logLibrary.LogError(exception);
-            _commandCenterLogger.EmitAlert(exception.Message, Assembly.GetExecutingAssembly().GetName().Name);
-        }
+        public void LogError(Exception exception) => 
+            _customLogger.NotifyError(exception.Message, _applicationName);
 
-        public void LogInfo(string message) => _logLibrary.LogInfo(message);
+        public void LogInfo(string message) => 
+            _customLogger.NotifyInfo(message, _applicationName);
     }
 }

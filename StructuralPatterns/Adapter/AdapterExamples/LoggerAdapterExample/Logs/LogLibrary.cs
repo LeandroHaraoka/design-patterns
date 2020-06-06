@@ -6,20 +6,18 @@ namespace LoggerAdapterExample.Logs
     {
         public void LogError(Exception exception)
         {
-            Console.WriteLine("\n[LogLibrary]");
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("Error: ");
+            Console.WriteLine("\n[LogLibrary]");
+            Console.WriteLine($"Error: {exception.Message}");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"{exception.Message}");
         }
 
         public void LogInfo(string message)
         {
-            Console.WriteLine("\n[LogLibrary]");
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("Info: ");
+            Console.WriteLine("\n[LogLibrary]");
+            Console.WriteLine($"Info: {message}");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"{message}");
         }
     }
 }

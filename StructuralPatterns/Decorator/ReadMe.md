@@ -216,6 +216,164 @@ Output:
 
 ![Retrieve Token Output](Images/RetrieveTokenOutput.png)
 
+## Decorator and Adapter Example
+
+Suppose an store application manages product orders. These orders can be executed and cancelled. When any of these operations happens, a message is logged. But, one day this store gets bigger and two teams are created, one responsible for executions and other for cancellations. So, when these operations happen, in addition to logs, teams should receive emails.
+
+At this moment, client interacts with LogLibrary via an IOrderNotifier interface in order to notify Orders operations.
+
+```csharp
+public interface IOrderNotifier
+{
+    void NotifyExecution(Order order);
+    void NotifyCancellation(Order order);
+}
+```
+```csharp
+public class LogLibrary : IOrderNotifier
+{
+    public void NotifyCancellation(Order order)
+    {
+        // Instructions to notify a cancellation log
+    }
+
+    public void NotifyExecution(Order order)
+    {
+        // Instructions to notify an execution log
+    }
+}
+```
+
+The application already contains an EmailNotifier. You want to use this service to send order operations emails.
+
+```csharp
+public class EmailNotifier
+{
+    public void SendEmail(Email email)
+    {
+        // Instructions to send an email
+    }
+}
+```
+```csharp
+public class Email
+{
+    public string Subject { get; set; }
+    public string Sender { get; set; }
+    public string Destination { get; set; }
+    public string Message { get; set; }
+
+    public Email(string subject, string sender, string destination, string message)
+    {
+        Subject = subject;
+        Sender = sender;
+        Destination = destination;
+        Message = message;
+    }
+}
+```
+
+To avoid affecting the client and the LogLibrary, you can use a Decorator to extend LogLibrary and include emails to the notification process. But, you want to decouple it from the LogLibrary and EmailNotifier, because in the future a new kind of notification can be added.
+
+To solve this problem, decorator must interact with all notifiers via a common interface (IOrderNotifier). 
+
+So, EmailNotifier must be adapted to implement the interface.
+
+```csharp
+public class EmailNotifierAdapter : IOrderNotifier
+{
+    private readonly EmailNotifier _emailNotifier;
+
+    public EmailNotifierAdapter(EmailNotifier emailNotifier)
+    {
+        _emailNotifier = emailNotifier;
+    }
+
+    public void NotifyExecution(Order order)
+    {
+        var orderMessage = OrderMessage.Create(order);
+
+        _emailNotifier.SendEmail(new Email(
+            "NEW ORDER EXECUTION", "sender@xpto.com", "new-order-team@xpto.com", orderMessage));
+    }
+
+    public void NotifyCancellation(Order order)
+    {
+        var orderMessage = OrderMessage.Create(order);
+
+        _emailNotifier.SendEmail(new Email(
+            "ORDER CANCELLATION", "sender@xpto.com", "cancellation-team@xpto.com", orderMessage));
+    }
+}
+```
+
+Finally, the decorator can be created. Its responsibility is to invoke email notifier in addition to LogLibrary. Notice that it interacts with both LogLibrary and EmailNotifierAdapter via IOrderNotifier.
+
+```csharp
+public class OrderNotifierDecorator : IOrderNotifier
+{
+    private readonly IOrderNotifier _logger;
+    private readonly IOrderNotifier _emailNotifier;
+
+    public OrderNotifierDecorator(IOrderNotifier logger, IOrderNotifier emailNotifier)
+    {
+        _logger = logger;
+        _emailNotifier = emailNotifier;
+    }
+
+    public void NotifyExecution(Order order)
+    {
+        _logger.NotifyExecution(order);
+        _emailNotifier.NotifyExecution(order);
+    }
+
+    public void NotifyCancellation(Order order)
+    {
+        _logger.NotifyCancellation(order);
+        _emailNotifier.NotifyCancellation(order);
+    }
+}
+```
+
+Before the implementation, order operations were notified as below.
+
+```csharp
+var order = new Order(Guid.NewGuid(), "Product", "BuyerName", "SellerName", 2.50m, 1);
+
+new LogLibrary().NotifyExecution(order);
+new LogLibrary().NotifyCancellation(order);
+```
+
+Output:
+
+![Logger Adapter Decorator Output](Images/LoggerAdapterDecoratorOutput.png)
+
+Now, the notifications occur as below.
+
+```csharp
+var orderNotifier = new OrderNotifierDecorator(
+    new LogLibrary(),
+    new EmailNotifierAdapter(new EmailNotifier()));
+```
+
+- Execution 
+
+```csharp
+orderNotifier.NotifyExecution(order);
+```
+
+![Logger Adapter Decorator Output 2](Images/LoggerAdapterDecoratorOutput2.png)
+
+- Cancellation 
+
+```csharp
+orderNotifier.NotifyCancellation(order);
+```
+
+![Logger Adapter Decorator Output 3](Images/LoggerAdapterDecoratorOutput3.png)
+
+
+
 ## Use cases
 
 Use Decorator Pattern when:

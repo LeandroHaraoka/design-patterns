@@ -11,10 +11,11 @@ namespace LoggerAdapterExample
             Console.WriteLine("Adapter");
             Console.WriteLine("Logger Adapter Example\n");
 
-            var service = new ClientService(
-                new LoggerAdapter(new LogLibrary(), new CommandCenterLogger()));
+            var deprecatedService = new ClientService(new LogLibrary());
+            deprecatedService.SomeServiceAction();
 
-            service.SomeServiceAction();
+            var newService = new ClientService(new LoggerAdapter(new CustomLogger()));
+            newService.SomeServiceAction();
         }
     }
 }

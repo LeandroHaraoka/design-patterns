@@ -20,15 +20,13 @@ Object Adapter: it's based on composition. The adapter has a reference to the ad
 
 ## Problem
 
-Let's see an example in which an application uses a LogLibrary to log its information and errors. You were asked to, in addition to log messages and errors, send all errors to a command center, that will be monitored by a team.
+Let's see an example in which an application uses a LogLibrary to log its information and errors. This library is not meeting our needs, so we need to replace it with a new one. The problem is that this new library has different signatures, so we need to adapt it, so that the consumers are not affected by the replacement.
 
-Until now, the client service consumes the library via an interface, called ILogger, that consists of LogError e LogInfo methods.
+Until now, the client service consumes the library via an interface, called ILogger, that defines LogError e LogInfo methods.
 
 ![Logger Adapter Diagram 1](Images/LoggerAdapterDiagram1.png)
 
-So, you've decided to implement an adapter, that contains a reference to LogLibrary, the adaptee object. It'll also contain a reference to the CommandCenterLogger, so it can both send messages to the command center and log via the LogLibrary.
-
-The adapter will implement ILogger interface, so the client service can use it without being modified.
+So, you've decided to implement an adapter that contains a reference to the new library (CustomLogger), the adaptee object. It also implements ILogger interface, so the client service can use it without being modified.
 
 ![Logger Adapter Diagram 2](Images/LoggerAdapterDiagram2.png)
 
@@ -50,7 +48,8 @@ public class ClientService
         try
         {
             _logger.LogInfo($"Executing {nameof(SomeServiceAction)} method.");
-            throw new ArgumentException($"Found an argument exception while executing {nameof(SomeServiceAction)} method.");
+            throw new ArgumentException(
+                $"This is a custom error message sent while executing {nameof(SomeServiceAction)} method.");
         }
         catch (Exception exception)
         {
@@ -87,56 +86,57 @@ public class LogLibrary : ILogger
 So, the output of the client service execution is this.
 
 ```csharp
-var service = new ClientService(new LogLibrary());
-service.SomeServiceAction();
+var deprecatedService = new ClientService(new LogLibrary());
+deprecatedService.SomeServiceAction();
 ```
 
 Output:
 
 ![Logger Adapter Output](Images/LoggerAdapterOutput.png)
 
-The command center logger is showed below (method body was hidden to simplify the article). The EmitAlert method must be executed everytime an error occurs.
+The new CustomLogger library is showed below (method body was hidden to simplify the article). 
 
 ```csharp
-public void EmitAlert(string error, string applicationName)
+public class CustomLogger
 {
-    // Instructions to emit an alert to command center
+    public void NotifyError(string error, string applicationName)
+    {
+        // New instructions to log an error
+    }
+
+    public void NotifyInfo(string info, string applicationName)
+    {
+        // New instructions to log some information
+    }
 }
 ```
 
-The LoggerAdapter class is the key point of the pattern. Notice that it implements the ILogger interface, so ClientService can consume it.
-
-The adapter solves the problem that is emitting an alert without stopping to log, that's why it contains a reference both to CommandCenterLogger and to the adaptee LogLibrary. Notice that the adapter is defining how the log error should be executed. Maybe it's a better idea to use another pattern for this (like Facade) and makes LoggerAdapter responsible just for adapting the CommandCenterLogger.
+The LoggerAdapter class is the key point of the pattern. Notice that it implements the ILogger interface, so ClientService can consume it. It just translate requests so that the CustomLogger can receive them.
 
 ```csharp
 public class LoggerAdapter : ILogger
 {
-    private readonly CommandCenterLogger _commandCenterLogger;
-    private readonly LogLibrary _logLibrary;
+    private readonly CustomLogger _customLogger;
+    private readonly string _applicationName = Assembly.GetExecutingAssembly().GetName().Name;
 
-    public LoggerAdapter(LogLibrary logLibrary, CommandCenterLogger commandCenterLogger)
+    public LoggerAdapter(CustomLogger commandCenterLogger)
     {
-        _commandCenterLogger = commandCenterLogger;
-        _logLibrary = logLibrary;
+        _customLogger = commandCenterLogger;
     }
 
-    public void LogError(Exception exception)
-    {
-        _logLibrary.LogError(exception);
-        _commandCenterLogger.EmitAlert(exception.Message, Assembly.GetExecutingAssembly().GetName().Name);
-    }
+    public void LogError(Exception exception) => 
+        _customLogger.NotifyError(exception.Message, _applicationName);
 
-    public void LogInfo(string message) => _logLibrary.LogInfo(message);
+    public void LogInfo(string message) => 
+        _customLogger.NotifyInfo(message, _applicationName);
 }
 ```
 
 With this implemetation the client service is able to use the adapter to log and emit alerts.
 
 ```csharp
-var service = new ClientService(
-    new LoggerAdapter(new LogLibrary(), new CommandCenterLogger()));
-
-service.SomeServiceAction();
+var newService = new ClientService(new LoggerAdapter(new CustomLogger()));
+newService.SomeServiceAction();
 ```
 
 Output:
