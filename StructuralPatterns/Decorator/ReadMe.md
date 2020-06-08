@@ -372,7 +372,9 @@ orderNotifier.NotifyCancellation(order);
 
 ![Logger Adapter Decorator Output 3](Images/LoggerAdapterDecoratorOutput3.png)
 
+The suggested implementation in this example looks very similiar to a Facade pattern structure, so it can probably generate some confusion. But, we need to consider the differences between patterns intentions. 
 
+Decorator intents to provide additional behavior to an existing element while Facade unifies subsystems actions in a simplified interface. The implementations of both patterns are really similar, but the example intention is to add emails to an existing notification operation. If we want to group existing emails and logs subsystems, the code would be almost the same, but it would fits a Facade implementation, as it would be a refactoring pattern.
 
 ## Use cases
 
