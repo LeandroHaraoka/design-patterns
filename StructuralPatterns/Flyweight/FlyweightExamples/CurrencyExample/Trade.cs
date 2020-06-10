@@ -2,7 +2,7 @@
 
 namespace CurrencyExample
 {
-    public class Trade
+    public class Trade : TradeFlyweight
     {
         public Guid BuyerId { get; set; }
         public Guid SellerId { get; set; }
@@ -13,15 +13,16 @@ namespace CurrencyExample
             SellerId = sellerId;
         }
 
-        public void BookTrade(ForexDetails forexDetails)
+        public override void BookTrade(TradeOperation tradeOperation)
         {
             Console.WriteLine("\nNew Order Booked.");
-            Console.WriteLine($"Trade Date: {forexDetails.TradeDate.ToShortDateString()}");
+            Console.WriteLine($"Trade Date: {tradeOperation.TradeDate.ToShortDateString()}");
             Console.WriteLine($"Buyer Id: {BuyerId}");
             Console.WriteLine($"Seller Id: {SellerId}");
-            Console.WriteLine($"CCY1/CCY2: {forexDetails.CurrencyPair}");
-            Console.WriteLine($"Volume: {forexDetails.Volume}");
-            Console.WriteLine($"Price: {forexDetails.Price}");
+            Console.WriteLine($"CCY1/CCY2: {tradeOperation.CurrencyPair}");
+            Console.WriteLine($"Volume: {tradeOperation.Volume}");
+            Console.WriteLine($"Price: {tradeOperation.Price}");
+            tradeOperation.Booked = true;
         }
     }
 }

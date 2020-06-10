@@ -2,14 +2,15 @@
 
 namespace CurrencyExample
 {
-    public class ForexDetails
+    public class TradeOperation
     {
         public CurrencyPairs CurrencyPair { get; set; }
         public decimal Volume { get; set; }
         public decimal Price { get; set; }
         public DateTime TradeDate { get; set; }
+        public bool Booked { get; set; }
 
-        public ForexDetails(CurrencyPairs currencyPair, decimal volume, decimal price, DateTime tradeDate)
+        public TradeOperation(CurrencyPairs currencyPair, decimal volume, decimal price, DateTime tradeDate)
         {
             CurrencyPair = currencyPair;
             Volume = volume;
