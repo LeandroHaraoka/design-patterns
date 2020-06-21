@@ -200,7 +200,7 @@ Use Bridge Pattern when:
 
 ### Adapter
 
-- Bridge is an upfront design pattern, which allows you to make objects orthogonal variations easier. The adapter intention is to solve existing compatibility issues. 
+- Bridge is an upfront design pattern, which allows you to make objects orthogonal variations easier. The adapter intention is to solve existing compatibility issues.
 
 - Bridge ensures new variants for both sides (new abstractions and implementations) while the adapter does not intent on adding new functionalities, it's just a plug for the existing ones.
 

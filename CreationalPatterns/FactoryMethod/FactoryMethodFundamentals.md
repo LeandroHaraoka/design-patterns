@@ -22,7 +22,7 @@ The diagram resumes what was said above.
 
  - Factory methods return an abstraction of the product for the client. These methods can also have a default implementation.
 
-```
+```csharp
 public interface ISmartphoneFactory
 {
     Smartphone CreateLowCost();
@@ -35,7 +35,7 @@ public interface ISmartphoneFactory
 
  - Note that we have three factory methods, one for each product variation. Another implementation would have a single method that receives a parameter indicating each variation of the product it should create.
 
-```
+```csharp
 public class AppleSmartphoneFactory : ISmartphoneFactory
 {
     public Smartphone CreateLowCost() => new AppleSmartphone("IPhone 5C", 1, 1.3f, 2013);
@@ -45,7 +45,7 @@ public class AppleSmartphoneFactory : ISmartphoneFactory
     public Smartphone CreateLuxurious() => new AppleSmartphone("IPhone 11 PRO MAX", 4, 13f, 2019);
 }
 ```
-```
+```csharp
 public class SamsungSmartphoneFactory : ISmartphoneFactory
 {
     public Smartphone CreateLowCost() => new SamsungSmartphone("Samsung J7", 2, 1.6f, 2018);
@@ -58,7 +58,7 @@ public class SamsungSmartphoneFactory : ISmartphoneFactory
 
  - As the client must deal only with product abstraction, we create Smarphone abstract class. The concrete products derive from the abstract class and only the respective concrete factory deals with the concrete product.
 
-```
+```csharp
 public abstract class Smartphone
 {
     public string Name { get; set; }
@@ -94,12 +94,9 @@ public class SamsungSmartphone : Smartphone
 
  - Finally, the client can create smartphones using the factories abstraction used at the CreateAllSmartphones method and deal with the product abstraction as the PrintSmartphoneInfo does.
 
-```
+```csharp
 static void Main(string[] args)
 {
-    Console.WriteLine("Factory Method");
-    Console.WriteLine("Smartphone Factory Example");
-
     var appleSmartphoneFactory = new AppleSmartphoneFactory();
     CreateAllSmartphones(appleSmartphoneFactory);
     var samsungSmartphoneFactory = new SamsungSmartphoneFactory();
@@ -114,22 +111,17 @@ private static void CreateAllSmartphones(ISmartphoneFactory smartphoneFactory)
     PrintSmartphoneInfo(hypedSmartphone);
     var luxuriousSmartphone = smartphoneFactory.CreateLuxurious();
     PrintSmartphoneInfo(luxuriousSmartphone);
-
 }
 
 private static void PrintSmartphoneInfo(Smartphone smartphone)
 {
-    Console.WriteLine($"\nSmartphone:");
-    Console.WriteLine($"    Name: {smartphone.Name}");
-    Console.WriteLine($"    RandomAccessMemory: {smartphone.RandomAccessMemory}");
-    Console.WriteLine($"    Processor: {smartphone.Processor}");
-    Console.WriteLine($"    Year: {smartphone.Year}");
+    // Instruct to print smartphone details
 }
 ```
 
 ## Use cases
 
- - Use a Factory Method when:
+Use a Factory Method when:
 
  - A class can't anticipate the class of objects it must create. For example, according to an enumerator value it will use a specific factory method.
 

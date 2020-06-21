@@ -233,10 +233,10 @@ The life cycle of a stock quotation is defined as below.
 First, we'll configure the Mediator setup for the application assembly.
 
 ```csharp
-    services.AddMediatR(Assembly.GetExecutingAssembly());
+services.AddMediatR(Assembly.GetExecutingAssembly());
 ```
 
-Now, we can configure objects to send and receive messages from Mediator, by making the message and handlers classes to implement the interfaces ```INotification``` and ```INotificationHandler<in TNotification>```.
+Now, we can configure objects to send and receive messages from Mediator, by making the message and handlers classes to implement the interfaces ```INotification``` and ```INotificationHandler<TNotification>```.
 
 The StockQuotationProposal and StockQuotation represent the messages that will be shared through mediator.
 
@@ -350,7 +350,7 @@ The StockQuotationProposal handler performs the below instructions.
 - Check if the Broker is the owner of the proposal. 
 - If positive, approval instructions should be executed.
 - Then, it publishes a Stock Quotation for all other brokers.
--  After the publication, it checks if the quotation was executed.
+- After the publication, it checks if the quotation was executed.
 - If negative, it stores at its own repository and holds the quotation for a future oportunity.
 
 The StockQuotation handler performs the below instructions.

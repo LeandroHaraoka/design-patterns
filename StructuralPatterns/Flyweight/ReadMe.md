@@ -145,7 +145,7 @@ https://refactoring.guru/design-patterns/flyweight
 
 Pluralsight Course: *C# Design Patterns: Flyweight*. By Harrison Ferrone.
 
-Udemy Course: *Design Patterns in C# and .NET - Facade*. By Dmitri Nesteruk.
+Udemy Course: *Design Patterns in C# and .NET - Flyweight*. By Dmitri Nesteruk.
 
 ## Todo
 

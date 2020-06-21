@@ -20,6 +20,8 @@ To exemplify this pattern we'll present an example which designs a multiple wall
 
 Each kind of asset will be handled by a particular strategy that knows how to process it and register at the correct wallet.
 
+## Show Me The Code
+
 So, let's introduce the contexts objects.
 
 All asset types have a common structure that is defined by the Asset class. However, each type contains a particular movement structure, that's why it is generalized. As well as the movement structure, the strategy varies with the asset type.
@@ -86,10 +88,10 @@ public abstract class Movement
 To simplify the example, we'll consider that the strategy specific algorithm is to add an asset to the corresponding wallet and nothing else.
 
 ```csharp
-    public interface IWalletStrategy<TMovement> where TMovement : Movement
-    {
-        void AddAsset(Asset<TMovement> asset);
-    }
+public interface IWalletStrategy<TMovement> where TMovement : Movement
+{
+    void AddAsset(Asset<TMovement> asset);
+}
 ```
 
 Following we'll show the abstract movement and the strategy interface implementations. They do not deserve much attention, as it's a particular implementation of this example, but we'll show them for the curious ones.
@@ -334,7 +336,6 @@ Use Strategy Pattern when:
 - You must provide many variations for an object algorithm that should be interchangeable at runtime.
 - You want to vary an object behavior without exposing algorithm details to the client.
 - An object contain multiple conditionals to define its behaviors. 
-- 
 
 ## Advantages
 

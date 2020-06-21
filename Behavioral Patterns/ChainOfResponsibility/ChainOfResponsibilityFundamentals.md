@@ -358,23 +358,23 @@ public class DiscountApplier
 }
 ```
 ```csharp
-    public class DiscountEventArgs
-    {
-        public ItemNames _itemName;
-        public decimal _finalPrice;
+public class DiscountEventArgs
+{
+    public ItemNames _itemName;
+    public decimal _finalPrice;
 
-        public DiscountEventArgs(ItemNames itemName, decimal finalPrice)
-        {
-            _itemName = itemName;
-            _finalPrice = finalPrice;
-        }
+    public DiscountEventArgs(ItemNames itemName, decimal finalPrice)
+    {
+        _itemName = itemName;
+        _finalPrice = finalPrice;
     }
+}
 ```
 The below Discount class is an abstraction inherited by the nodes of the chain.
 
 When the discount applier raises an discount event, every class that derives from Discount will execute OnDiscountEvent method. This method applies the discount rate at _finalPrice field from DiscountEventArgs. 
 
-So, the event handling will result in consecutives discounts and, after all nodes handle the event, the final price will be available at DiscountEventArgs
+So, the event handling will result in consecutives discounts and, after all nodes handle the event, the final price will be available at DiscountEventArgs.
 
 ```csharp
 public abstract class Discount
@@ -435,12 +435,7 @@ Now, we have prepared our chain that handles all discounts. So let's create some
 As introduced before, we'll have three items.
 
 ```csharp
-public enum ItemNames
-{
-    Shirt,
-    Jeans,
-    Sunglasses
-}
+public enum ItemNames { Shirt, Jeans, Sunglasses }
 
 public class Shirt : Item
 {
@@ -485,7 +480,7 @@ public class FirstPurchaseDiscount : Discount
 }
 ```
 ```csharp
-    public class DailySale : Discount
+public class DailySale : Discount
 {
     private readonly Timer _timer;
 

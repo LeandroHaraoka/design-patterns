@@ -8,7 +8,7 @@ The Command Pattern is very useful when you want to queue a request and keep tra
 
 This pattern is structured with four participants: the command (abstraction), concrete command, invoker and the receiver.
 
-TODO: Command Diagram
+![Command Pattern Diagram](Images/CommandPatternDiagram.png)
 
 - The invoker receives a command instance and stores it. It's responsible for triggering the command execution. 
 - The concrete command contains all the necessary parameters related to the request and stores a reference to the respective receiver. It implements the Command Execute method, that defines how the request will be sent to the receiver. 
@@ -342,6 +342,7 @@ Use Command Pattern when:
 - It's an overkill for scenarios when the invoker is not so necessary.
 
 # Tips
+
 - A single invoker can handle many commands
 - A single command can have multiple receivers
 - A single command can be invoked by multiple invokers.

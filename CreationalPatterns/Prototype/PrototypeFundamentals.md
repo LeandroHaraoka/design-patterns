@@ -16,7 +16,7 @@ The Prototype pattern suggests the below diagram implementation.
 
 - First we create the abstraction called Prototype, that contains only methods related to the clone process. In most cases, it’s a single clone method, but in this example we'll have show different types of clone.
 
-```
+```csharp
 public abstract class Prototype
 {
     public abstract Prototype ShallowCopy();
@@ -29,7 +29,7 @@ public abstract class Prototype
 
 - Shallow copy just calls MemberwiseClone and cast the result. To perform a deep copy we also need to modify each nested object. This process would be tedious for instances of complex classes. Later in this article, we'll present an alternative for it.
 
-```
+```csharp
 public class Person : Prototype
 {
     public string Name { get; set; }
@@ -48,10 +48,7 @@ public class Person : Prototype
 
     public override void PrintDetails()
     {
-        Console.WriteLine($"Name: {Name}");
-        Console.WriteLine($"Age: {Age}");
-        Console.WriteLine($"DocumentType: {Document.Type}");
-        Console.WriteLine($"DocumentValue: {Document.Value}");
+        // Instructions to print person details
     }
 }
 
@@ -76,12 +73,9 @@ public enum DocumentType
 
 - The client can now create new instances of any object that derives from Prototype. He calls the existing object cloning methods and receive the respective prototype. Then, he can modify it to get the desired object instance. Note that in this example we have two ways for generating a prototype: shallow and deep copy. If we make a shallow copy, modifications made in the new instance are reflected at the original instance. Frequently it's a not desired behavior that could be avoided using a deep copy.
 
-```
+```csharp
 static void Main(string[] args)
 {
-    Console.WriteLine("Prototype");
-    Console.WriteLine("Person Prototype Example");
-
     var originalPerson = new Person()
     {
         Name = "Hara",
@@ -122,7 +116,7 @@ The Prototype pattern using IClonable example follows the below diagram.
 
  - The implementation is similar to the previous example, but we have a single cloning method. You can decided between shallow and deep copy implementation.
 
-```
+```csharp
 public class Person : ICloneable
 {
     public string Name { get; set; }
@@ -143,12 +137,9 @@ public class Person : ICloneable
 
 - When the client invokes the cloning method, he receives an Object instance. So, casting the result is necessary.
 
-```
+```csharp
 static void Main(string[] args)
 {
-    Console.WriteLine("Prototype");
-    Console.WriteLine("Clonable Person Example");
-
     var originalPerson = new Person()
     {
         Name = "Hara",
@@ -185,7 +176,7 @@ The previous examples uses an instance passed by the client to generate a protot
 
 - We still have a Prototype abstraction, but it performs only deep copies.
 
-```
+```csharp
 public abstract class Prototype
 {
     public abstract Prototype DeepCopy();
@@ -195,7 +186,7 @@ public abstract class Prototype
 
 - Person class implements the cloning method using a generic DeepCopy() method invocation that is an object extension. This method performs a serializing through deep copy. It's a way to deep copy an object without the complexity of setting each nested object a new value.
 
-```
+```csharp
 public class Person : Prototype
 {
     public string Name { get; set; }
@@ -206,10 +197,7 @@ public class Person : Prototype
 
     public override void PrintDetails()
     {
-        Console.WriteLine($"Name: {Name}");
-        Console.WriteLine($"Age: {Age}");
-        Console.WriteLine($"DocumentType: {Document.Type}");
-        Console.WriteLine($"DocumentValue: {Document.Value}");
+        // Instructions to print details
     }
 }
 
@@ -233,7 +221,7 @@ public static class ObjectExtensions
 
  - Now, we'll show you the PeopleRegistry. A people registry initializes loading a set of pre-built prototype instances of Person. In this example, we have a male and a female prototype stored at a Dictionary where the keys are respectively "male" and "female".
 
-```
+```csharp
 public class PeopleRegistry
 {
     private readonly Dictionary<string, Person> _registry = new Dictionary<string, Person>();
@@ -269,12 +257,9 @@ public class PeopleRegistry
 
 - Then, the client can use PeopleRegistry to create a new Prototype Instance by passing the prototype identifier. As the cloning method performs a deep copy, the new instance can be modified without modifying the stored prototype.
 
-```
+```csharp
 static void Main(string[] args)
 {
-    Console.WriteLine("Prototype");
-    Console.WriteLine("Prototype Complete Example");
-
     var peopleRegistry = new PeopleRegistry();
 
     var malePerson = peopleRegistry.CreatePerson("male");

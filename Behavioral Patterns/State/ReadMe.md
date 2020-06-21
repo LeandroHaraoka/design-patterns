@@ -305,9 +305,9 @@ activity.ExecuteCurrentTask(10000, true);
 activity.ExecuteCurrentTask(10000);
 ```
  
- Notice that each state has its specific way to alert the development team.
+Notice that each state has its specific way to alert the development team.
 
- Output:
+Output:
 
 ![Scrum Task Board Example](Images/ScrumTaskBoardExample.png)
 

@@ -390,6 +390,7 @@ public class Database : INotifyPropertyChanged
 ```
 
 The window has a structure similar to Database structure.
+
 ```csharp
 public class Window : INotifyPropertyChanged
 {
@@ -475,7 +476,7 @@ Let's consider the following:
 First Observer = Database
 First Expression = ```() => database.ProductName```
 Second Observer = Window
-Second Expression = ```()() => window.DisplayName```
+Second Expression = ```() => window.DisplayName```
 
 First, if _isDisposed is false, it will subscribe the Window at Database PropertyChanged event. So, every time the event occurs, DisplayName (secondProperty) will receive the value of ProductName (firstProperty) from Database (firstObserver).
 The second subscription is the reverse scenario. 
@@ -532,14 +533,17 @@ Use an Observer when:
 - New subscriptions can be created at runtime.
 
 ## Disadvantages
+
 - Bad implementations can cause a messy broadcast, as it can create a cascade of updates in a scenario with many dependencies.
 - The implementations do not ensure any notification order. If the observers have a specific order to be notified, the implementation will have to be reconsidered.
 
-## Tips
-Don’t depend on a specific order of notification for your Observers.
-Don’t be afraid to create your own Observable implementation if needed.
-
 ## References
+
+https://refactoring.guru/design-patterns/observer
+
+Pluralsight Course: *Design Patterns in Java: Behavioral - Observer Pattern*. By Bryan Hansen.
+
+Udemy Course: *Design Patterns in C# and .NET - Observer*. By Dmitri Nesteruk.
 
 ## TODOs
 Pluralsight Design Patterns in Java: Comparison with Mediator

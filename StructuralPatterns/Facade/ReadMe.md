@@ -105,9 +105,9 @@ public class TransactionSender : ITransactionSender
 So, at client side, a transaction can be sent as simple as following.
 
 ```csharp
-            var transaction = new Transaction(Guid.NewGuid(), Guid.NewGuid(), 1000, DateTime.UtcNow);
-            var transactionSender = new TransactionSender();
-            var transactionStatus = transactionSender.Send(transaction);
+var transaction = new Transaction(Guid.NewGuid(), Guid.NewGuid(), 1000, DateTime.UtcNow);
+var transactionSender = new TransactionSender();
+var transactionStatus = transactionSender.Send(transaction);
 ```
 
 ## Use cases

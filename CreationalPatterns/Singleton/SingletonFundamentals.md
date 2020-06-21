@@ -1,21 +1,20 @@
 # Singleton
 
-The Singleton Patterns ensures a class only has one instance, and provide a global point of access to
-it.
+The Singleton Patterns ensures a class only has one instance, and provide a global point of access to it.
 
 ## Problem
 
 The first thing Singleton Pattern sets out to solve is creating a single object instance. Some objects of an application can be instantiated only one time. Some of these objects are thread pools, caches, objects that handle preferences and registry settings, loggers and drivers to external devices. In most cases, these objects must be acessible by many points of the code, so the Singleton Patterns also ensures global access for them.
 
-## Show me the code
-
 Let's start with a simple example. Suppose an application requires a Logger service that will be reused by the code.
 
 ![Singleton Pattern Diagram ](Images/SimpleSingletonExample.png)
 
+## Show me the code
+
 - We create the Logger service class. Its constructor cannot be public, otherwise the client will be able to create new Logger instances. The method that calls the private constructor is a static method which ensures that, one time initialized, the Logger class will always return the same instance. This instance is stored at a private static field named _logger.
 
-```
+```csharp
 public class Logger
 {
     private static Logger _logger;
@@ -36,7 +35,7 @@ public class Logger
 
 - The Logger service can be consumed as below.
 
-```
+```csharp
 static void Main(string[] args)
 {
     var firstInstance = Logger.GetInstance();
@@ -52,7 +51,7 @@ Considering the previous example, if two different threads simultaneously invoke
 
 - The following example shows a singleton thread safe Database implementation. The GetInstance method locks all threads which intend to initialize the Database. The first thread will succesfully initialize the fields _instance and _countriesPopulation. The next threads, will fail at execution of the second ```if (_instance is null)``` statement. This ensures that only the first thread will be able to initialize the Database.
 
-```
+```csharp
 public class SingletonDatabase
 {
     private static SingletonDatabase _instance;
@@ -103,23 +102,23 @@ public class SingletonDatabase
     }
 }
 ```
-```
-    public class CountryPopulation
-    {
-        public string CountryName { get; set; }
-        public int PopulationAmount { get; set; }
+```csharp
+public class CountryPopulation
+{
+    public string CountryName { get; set; }
+    public int PopulationAmount { get; set; }
 
-        public CountryPopulation(string countryName, int populationAmount)
-        {
-            CountryName = countryName;
-            PopulationAmount = populationAmount;
-        }
+    public CountryPopulation(string countryName, int populationAmount)
+    {
+        CountryName = countryName;
+        PopulationAmount = populationAmount;
     }
+}
 ```
 
 - Then, the client can invoke GetInstance static method that will return the instance. If it's not the first execution, a cached instance will be returned.
 
-```
+```csharp
 static void Main(string[] args)
 {
     var database = SingletonDatabase.GetInstance();
@@ -140,7 +139,7 @@ static void Main(string[] args)
 
 - Suppose an application contains a CountryReader responsible for reading data stored at database. This reader will receive the database interface via injection.
 
-```
+```csharp
 public interface IDatabase
 {
     CountryPopulation GetPopulationFor(string countryName);
@@ -168,7 +167,7 @@ public class CountryReader
 
 - The SingletonDatabase will now have a public constructor used at the Dependency Injection setup. It will not be necessary to control thread safety because the way we add services to service collection will ensure multthread scenarios.
 
-```
+```csharp
 public class SingletonDatabase : IDatabase
 {
     private static IDictionary<string, CountryPopulation> _countriesPopulation;
@@ -203,7 +202,7 @@ public class SingletonDatabase : IDatabase
 
 - So, both CountryReader and Database services can be added to service collection by ```AddSingleton<TService>``` and ```AddSingleton<TService, TImplementation>```. These methods ensure thread safety, but will not go into details as it's not the article scope.
 
-```
+```csharp
 static void Main(string[] args)
 {
     var serviceProvider = new ServiceCollection()

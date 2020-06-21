@@ -11,7 +11,8 @@ Suppose someone needs to construct a house. There are several steps for getting 
 The Builder Pattern suggests the following rules for creating a new product.
 
  - List all data that each builder must generate.
-```
+
+```csharp
 public class House
 {
     public int WallsBuilt { get; set; }
@@ -30,7 +31,7 @@ public class House
 
  - Extracts the product construction code to a new class named **builders**. Products ocassionally have variants in their construction, for example, a house can be constructed from wood as well as stone and each step of the construction process can differ according to the material. In these cases, specific builder can be created for each variant of the product construction. A builder defines and keep track (at the object field inside builder) of the created representation. Also, create an abstract interface of these builders.
 
-```
+```csharp
 public interface IHouseBuilder
 {
     void BuildWalls(int wallsNumber);
@@ -42,7 +43,7 @@ public interface IHouseBuilder
     void BuildBBQGrill();
 }
 ```
-```
+```csharp
 public class StoneHouseBuilder : IHouseBuilder
 {
     private House _stoneHouse;
@@ -106,7 +107,7 @@ public class StoneHouseBuilder : IHouseBuilder
     }
 }
 ```
-```
+```csharp
 public class WoodHouseBuilder : IHouseBuilder
 {
     private House _woodHouse;
@@ -173,7 +174,7 @@ public class WoodHouseBuilder : IHouseBuilder
 
 - Frequently, builder methods are called recurrently in the same order and with the same parameter values. To avoid replicating builder invocations code, you can use **Directors**. A Director is a class that defines the order in which to execute the building steps. It also hides the construction implementation from the client.
 
-```
+```csharp
 public class HouseDirector
 {
     private IHouseBuilder _houseBuilder;
@@ -209,7 +210,7 @@ public class HouseDirector
 
 - Finally, the client can use the Director class to create a Product without worrying about construction implementation. The Director defines the order and parameters of the execution and the builder executes it. In this example, the client can create a simple stone house as follows.
 
-```
+```csharp
 var houseDirector = new HouseDirector();
 var stoneHouseBuilder = new StoneHouseBuilder();
 
@@ -257,7 +258,7 @@ During an object construction process, builders eventually will throw exceptions
 
 See a simple example of a Builder.
 
-```
+```csharp
 public class Person
 {
     public string Name { get; set; }
@@ -295,7 +296,7 @@ To avoid throwing an axception from a Builder method, we can add a Finite State 
 
 Here we added a NameState machine which first state is 'UnitializedName'.
 
- ```
+```csharp
 public class PersonBuilder
 {
     private INameState _nameState = new UnitializedNameState();
@@ -315,14 +316,14 @@ public class PersonBuilder
 
 If we call Build method without calling SetName instructions, it will return an InvalidOperationException.
 
-```
+```csharp
 public interface INameState
 {
     INameState Set(string name);
     string Get();
 }
 ```
-```
+```csharp
 public class UnitializedNameState : INameState
 {
     public INameState Set(string name) => new InitializedNameState(name);
@@ -334,7 +335,7 @@ When we call SetName, 'Name' state changes from 'UnitializedNameState' to 'Initi
 
 If we call SetName again, it will continue at InitializedNameState, but storing the new name value.
 
-```
+```csharp
 public class InitializedNameState : INameState
 {
     private string _name;
@@ -361,7 +362,7 @@ Ocasionally it'll be necessary to create an inheritance from existing builder. I
 Suppose we have the following scenario: an entity Person with name, age and job position.
 For building a person object with name and age we have a PersonInfoBuilder. But, we want to build a person with also a job position value. So we have a derived PersonJobBuilder. We can not just derive, because PersonInfoBuilder.WithName() would return a PersonInfoBuilder, not a PersonJobBuilder.
 
-```
+```csharp
 public class Person
 {
     public string Name { get; set; }
@@ -369,7 +370,7 @@ public class Person
     public string Position { get; set; }
 }
 ```
-```
+```csharp
 public abstract class PersonBuilder
 {
     protected Person _person;
@@ -385,7 +386,7 @@ public abstract class PersonBuilder
     }
 }
 ```
-```
+```csharp
 public class PersonInfoBuilder<TBuilder> : PersonBuilder
     where TBuilder : PersonInfoBuilder<TBuilder>
 {
@@ -407,7 +408,7 @@ Note that we added a recursive generic constraint for PersonInfoBuilder. The gen
 
 The derived PersonJobBuilder will necessary inherits from PersonInfoBuilder of TBuilder as defined in the above constraint.
 
-```
+```csharp
 public class PersonJobBuilder<TBuilder> : PersonInfoBuilder<TBuilder>
     where TBuilder : PersonJobBuilder<TBuilder>
 {
@@ -421,7 +422,7 @@ public class PersonJobBuilder<TBuilder> : PersonInfoBuilder<TBuilder>
 
 Note that we replicated the recursive generic in PersonJobBuilder class. So, we can still continue the inheritance tree from this class. We'll now create the PersonAuxiliaryBuilder class (to use as TBuilder) that inherits from PersonJobBuilder of PersonAuxiliaryBuilder.
 
-```
+```csharp
 public class PersonAuxiliaryBuilder : PersonJobBuilder<PersonAuxiliaryBuilder>
 {
 }
@@ -446,7 +447,7 @@ There is another way to extend builders behaviours. Consider the same Person cla
 
 We can implement a FunctionalBuilder, as below, that will store all necessary functions and arguments  to create a Person.
 
-```
+```csharp
 public abstract class FunctionalBuilder<TBuilder>
     where TBuilder : FunctionalBuilder<TBuilder>
 {
@@ -475,7 +476,7 @@ public abstract class FunctionalBuilder<TBuilder>
 
 Now, when the client calls PersonBuilder methods, it will just create an action (with provided arguments) convert it into a function and store it at _builderFunctions. When the client calls Build method, all the stored functions will be executed by Aggregate method and the result will be the created Person.
 
-```
+```csharp
 public sealed class PersonBuilder
     : FunctionalBuilder<PersonBuilder>
 {
@@ -489,7 +490,7 @@ public sealed class PersonBuilder
 
 If necessary, we can create an extension method to introduce new steps for the Person object construction.
 
-```
+```csharp
 public static class PersonBuilderExtensions
 {
     public static PersonBuilder WorkAs(this PersonBuilder personBuilder, string position)
@@ -499,7 +500,7 @@ public static class PersonBuilderExtensions
 
 Consider the example below.
 
-```
+```csharp
 static void Main(string[] args)
 {
     var person = new PersonBuilder()

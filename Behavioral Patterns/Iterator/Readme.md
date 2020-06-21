@@ -16,6 +16,8 @@ The below diagram shows the relationship between iterable collections and its it
 
 The most common abstraction used to implement Iterator Pattern is the IEnumerator used by IEnumerable. This iterator interface defines a property that references the value stored at the current position. It also provides methods that perform algorithms to move on to the next element and to reset the traversal. Many collections like Lists, Dictionaries and Arrays use this interface to generate their iterators.
 
+## Show Me The Code
+
 ```csharp
 public interface IEnumerator
 {
@@ -32,12 +34,12 @@ Let's see an example that implements a bidirectional collection. In other words,
 First we created an generic abstract iterator that implements generic IEnumerable. So, the collection will require a GetEnumerator implementation. We're enforcing this rule in order to make the collection able to be traversed in a foreach statement.
 
 ```csharp
-    public abstract class IterableCollection<T> : IEnumerable<T>
-    {
-        public abstract IEnumerator<T> GetEnumerator();
+public abstract class IterableCollection<T> : IEnumerable<T>
+{
+    public abstract IEnumerator<T> GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-    }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+}
 ```
 
 The collection stores a list of T elements. It could be used any data structure for the items, we used List just to make it easy. The collection is instantiated with a _reverse value that indicates whether it should be traversed forward or backward. It also contains Add, GetSize and GetItemAt methods that will be useful for its Iterator.

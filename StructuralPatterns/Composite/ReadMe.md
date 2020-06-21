@@ -119,7 +119,7 @@ Output:
 
 ![File System Example Output](Images/FileSystemExampleOutput.png)
 
-## Composite, Visitor and Builder 
+## Composite, Visitor and Builder
 
 In the next example we'll see a way to cooperatively use Composite with other patterns.
 
@@ -140,64 +140,64 @@ So, let's see the code.
 A employee is a Component of the tree. It contains a reference to its parent (will explain after).
 
 ```csharp
-    public abstract class Employee
+public abstract class Employee
+{
+    public Leader Parent { get; set; }
+    public decimal Salary { get; set; }
+    
+    public readonly string _name;
+
+    protected readonly UpgradeSalaryVisitor _upgradeSalaryVisitor;
+    protected readonly PrintDetailsVisitor _printDetailsVisitor;
+
+    public Employee(string name, decimal salary, UpgradeSalaryVisitor upgradeSalaryVisitor, 
+        PrintDetailsVisitor printDetailsVisitor, Leader parent)
     {
-        public Leader Parent { get; set; }
-        public decimal Salary { get; set; }
-        
-        public readonly string _name;
-
-        protected readonly UpgradeSalaryVisitor _upgradeSalaryVisitor;
-        protected readonly PrintDetailsVisitor _printDetailsVisitor;
-
-        public Employee(string name, decimal salary, UpgradeSalaryVisitor upgradeSalaryVisitor, 
-            PrintDetailsVisitor printDetailsVisitor, Leader parent)
-        {
-            _name = name;
-            Salary = salary;
-            _upgradeSalaryVisitor = upgradeSalaryVisitor;
-            _printDetailsVisitor = printDetailsVisitor;
-            Parent = parent;
-        }
-
-        public abstract decimal GetTotalSalary();
-        public abstract void UpgradeSalary(decimal budget);
-        public abstract void PrintDetails(int depth = 0);
+        _name = name;
+        Salary = salary;
+        _upgradeSalaryVisitor = upgradeSalaryVisitor;
+        _printDetailsVisitor = printDetailsVisitor;
+        Parent = parent;
     }
+
+    public abstract decimal GetTotalSalary();
+    public abstract void UpgradeSalary(decimal budget);
+    public abstract void PrintDetails(int depth = 0);
+}
 ```
 
 The Leader (Composite) contains a list of its leds. GetTotalSalary implementation returns its own salary added to the total salary of its leds.
 
 ```csharp
-    public class Leader : Employee
+public class Leader : Employee
+{
+    protected readonly List<Employee> _employees = new List<Employee>();
+
+    public Leader(string name, decimal salary, UpgradeSalaryVisitor upgradeSalaryVisitor,
+        PrintDetailsVisitor printDetailsVisitor, Leader parent = default)
+        : base(name, salary, upgradeSalaryVisitor, printDetailsVisitor, parent)
     {
-        protected readonly List<Employee> _employees = new List<Employee>();
-
-        public Leader(string name, decimal salary, UpgradeSalaryVisitor upgradeSalaryVisitor,
-            PrintDetailsVisitor printDetailsVisitor, Leader parent = default)
-            : base(name, salary, upgradeSalaryVisitor, printDetailsVisitor, parent)
-        {
-        }
-
-        public override void UpgradeSalary(decimal budget)
-            => _upgradeSalaryVisitor.Visit(this, budget);
-
-        public override void PrintDetails(int depth = 0)
-            => _printDetailsVisitor.Visit(this, depth);
-   
-        public override decimal GetTotalSalary() 
-            => Salary + _employees.Sum(e => e.GetTotalSalary());
-
-        public List<Employee> GetEmployees() => _employees;
-
-        public void Add(Employee employee)
-        {
-            _employees.Add(employee);
-            employee.Parent = this;
-        }
-
-        public void Remove(Employee employee) => _employees.Remove(employee);
     }
+
+    public override void UpgradeSalary(decimal budget)
+        => _upgradeSalaryVisitor.Visit(this, budget);
+
+    public override void PrintDetails(int depth = 0)
+        => _printDetailsVisitor.Visit(this, depth);
+
+    public override decimal GetTotalSalary() 
+        => Salary + _employees.Sum(e => e.GetTotalSalary());
+
+    public List<Employee> GetEmployees() => _employees;
+
+    public void Add(Employee employee)
+    {
+        _employees.Add(employee);
+        employee.Parent = this;
+    }
+
+    public void Remove(Employee employee) => _employees.Remove(employee);
+}
 ```
 
 The Analyst (Leaf) also implements GetTotalSalary, but the return is just its own salary.
@@ -250,22 +250,22 @@ public class UpgradeSalaryVisitor
 We also have a PrintDetailsVisitor to display employees details at a console window.
 
 ```csharp
-    public class PrintDetailsVisitor
+public class PrintDetailsVisitor
+{
+    public void Visit(Analyst analyst, int depth = 0)
+        => PrintEmployeeDetails(analyst, depth, ConsoleColor.DarkGreen);
+
+    public void Visit(Leader leader, int depth = 0)
     {
-        public void Visit(Analyst analyst, int depth = 0)
-            => PrintEmployeeDetails(analyst, depth, ConsoleColor.DarkGreen);
-
-        public void Visit(Leader leader, int depth = 0)
-        {
-            PrintEmployeeDetails(leader, depth, ConsoleColor.Yellow);
-            leader.GetEmployees().ForEach(c => c.PrintDetails(depth + 1));
-        }
-
-        private void PrintEmployeeDetails(Employee employee, int depth, ConsoleColor color)
-        {
-            // Instructions to print employee details
-        }
+        PrintEmployeeDetails(leader, depth, ConsoleColor.Yellow);
+        leader.GetEmployees().ForEach(c => c.PrintDetails(depth + 1));
     }
+
+    private void PrintEmployeeDetails(Employee employee, int depth, ConsoleColor color)
+    {
+        // Instructions to print employee details
+    }
+}
 ```
 
 Now, we need to generate the tree structure based on the company hierarchy. We could manually do it, but it would not provide a reusable code. If a builder is capable of generating the hierarchy, it can be used by multiple services.
@@ -303,7 +303,12 @@ public class CompanyHierachyBuilder
     public CompanyHierachyBuilder AddAnalyst(string analystName, decimal analystSalary)
     {
         _currentEmployee.Add(
-            new Analyst(analystName, analystSalary, new UpgradeSalaryVisitor(), new PrintDetailsVisitor(), _currentEmployee));
+            new Analyst(
+                analystName, 
+                analystSalary, 
+                new UpgradeSalaryVisitor(), 
+                new PrintDetailsVisitor(), 
+                _currentEmployee));
 
         return this;
     }

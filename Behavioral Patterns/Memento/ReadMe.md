@@ -23,56 +23,56 @@ Suppose we want a calculator that stores its results everytime a new operation i
 So, the thing we're going to implement is the calculator operations. As the result must be stored, this calculator will be the Originator and the result defined by its _state field. Every math operation should change the _state value to the new result. Additionally, this calculator knows how to create a new memento and how to restore its state to a memento state.
 
 ```csharp
-    public class Originator
+public class Originator
+{
+    public double _state;
+
+    public Originator(double @base)
     {
-        public double _state;
+        Console.WriteLine($"\nInitial value: {@base}\n");
 
-        public Originator(double @base)
-        {
-            Console.WriteLine($"\nInitial value: {@base}\n");
-
-            _state = @base;
-        }
-
-        public void Add(double operand)
-        {
-            _state += operand;
-            PrintStateChange(nameof(Add), operand);
-        }
-
-        public void Subtract(double operand)
-        {
-            _state -= operand;
-            PrintStateChange(nameof(Subtract), operand);
-        }
-
-        public void MultiplyBy(double operand)
-        {
-            _state *= operand;
-            PrintStateChange(nameof(MultiplyBy), operand);
-        }
-
-        public void DivideBy(double operand)
-        {
-            _state /= operand;
-            PrintStateChange(nameof(DivideBy), operand);
-        }
-
-        public IMemento Save() => new ConcreteMemento(_state);
-
-        public void Restore(IMemento memento)
-        {
-            _state = memento.GetState();
-            PrintStateChange(nameof(Restore), null);
-        }
-
-        private void PrintStateChange(string action, double? operand)
-        {
-            Console.WriteLine($"Originator Action: {action} {operand}");
-            Console.WriteLine($"State: {_state}\n");
-
-        }
+        _state = @base;
     }
+
+    public void Add(double operand)
+    {
+        _state += operand;
+        PrintStateChange(nameof(Add), operand);
+    }
+
+    public void Subtract(double operand)
+    {
+        _state -= operand;
+        PrintStateChange(nameof(Subtract), operand);
+    }
+
+    public void MultiplyBy(double operand)
+    {
+        _state *= operand;
+        PrintStateChange(nameof(MultiplyBy), operand);
+    }
+
+    public void DivideBy(double operand)
+    {
+        _state /= operand;
+        PrintStateChange(nameof(DivideBy), operand);
+    }
+
+    public IMemento Save() => new ConcreteMemento(_state);
+
+    public void Restore(IMemento memento)
+    {
+        _state = memento.GetState();
+        PrintStateChange(nameof(Restore), null);
+    }
+
+    private void PrintStateChange(string action, double? operand)
+    {
+        Console.WriteLine($"Originator Action: {action} {operand}");
+        Console.WriteLine($"State: {_state}\n");
+
+    }
+}
 ```
 
 The memento is a simple class which consists of a Calculator state, that prevented from changes.
@@ -170,7 +170,7 @@ Use Memento Pattern when:
 Memento looks very similar to Command, but they have some differences.
 - Memento stores states while Command stores requests.
 - Memento allows states to be stored and restored while Command allows requests to be created and undone.
-- Memento goal is to provide a caretaker that stores the state history. Command goal is to store information to perform and undo actions. It also stores the requests history, but it's a side benefit, 
+- Memento goal is to provide a caretaker that stores the state history. Command goal is to store information to perform and undo actions. It also stores the requests history, but it's a side benefit.
 
 Memento and Command can be used together. 
 - Command should be used to perform actions that changes the object state. 
@@ -184,6 +184,4 @@ https://refactoring.guru/design-patterns/memento
 
 Pluralsight Course: *Design Patterns in Java: Behavioral - Memento Pattern*. By Bryan Hansen.
 
-Pluralsight Course: *C# Design Patterns: Mediator*. By Steve Michelotti.
-
-Udemy Course: *Design Patterns in C# and .NET - Mediator*. By Dmitri Nesteruk.
+Udemy Course: *Design Patterns in C# and .NET - Memento*. By Dmitri Nesteruk.
